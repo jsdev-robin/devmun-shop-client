@@ -6,7 +6,19 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:web": "turbo run dev --filter=web",
+    "build:web": "turbo run build --filter=web",
+    "lint:web": "turbo run lint --filter=web",
+    "check-types:web": "turbo run check-types --filter=web",
+    "dev:seller": "turbo run dev --filter=seller",
+    "build:seller": "turbo run build --filter=seller",
+    "lint:seller": "turbo run lint --filter=seller",
+    "check-types:seller": "turbo run check-types --filter=seller",
+    "dev:admin": "turbo run dev --filter=admin",
+    "build:admin": "turbo run build --filter=admin",
+    "lint:admin": "turbo run lint --filter=admin",
+    "check-types:admin": "turbo run check-types --filter=admin"
   },
   "devDependencies": {
     "prettier": "^3.6.0",
