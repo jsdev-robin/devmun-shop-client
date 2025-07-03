@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Text from '@repo/ui/components/text';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
+import { cn } from '@repo/ui/lib/utils';
+import { ui } from '../../ui';
 
 const specialItems = [
   {
@@ -51,7 +53,7 @@ const HomeSpecialPrice = () => {
               {specialItems.map((item, i) => (
                 <article
                   key={item.id}
-                  className="focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-8 focus-within:ring-offset-background sm:mun-card"
+                  className={cn(ui({ focusRing: 'default' }), 'sm:mun-card')}
                 >
                   <Link href="/" className="block w-full">
                     <div className="space-y-2">
