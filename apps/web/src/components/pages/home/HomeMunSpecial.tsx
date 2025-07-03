@@ -12,7 +12,7 @@ import { Badge } from '@repo/ui/components/badge';
 import SkeletonText from '@repo/ui/components/skeleton-text';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
 import { munCard } from '../../ui/mun-shop';
-import { HeartIcon } from 'lucide-react';
+import AddToWishlist from '../../ui/product/AddToWishlist';
 
 const featuredItems = [
   {
@@ -189,15 +189,7 @@ const HomeMunSpecial = () => {
                         )}
                       </Badge>
                     </div>
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      className={cn(
-                        'rounded-full size-8 border border-border hover:shadow-2 absolute top-2 right-2 translate-y-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-y-0 z-10 max-xl:touch:opacity-100 max-xl:touch:translate-y-0',
-                      )}
-                    >
-                      <HeartIcon />
-                    </Button>
+                    <AddToWishlist />
                   </Card>
                 ))}
               </React.Fragment>
