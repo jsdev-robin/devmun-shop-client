@@ -7,9 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Text from '@repo/ui/components/text';
 import { Skeleton } from '@repo/ui/components/skeleton';
-import { cn } from '@repo/ui/lib/utils';
 import ApiError from '@repo/ui/components/api-error';
-import { munCard } from '../../ui/mun-shop';
 
 const HomeHero = () => {
   const isLoading = false;
@@ -28,12 +26,7 @@ const HomeHero = () => {
           ) : (
             <React.Fragment>
               <div className="lg:col-span-2">
-                <article
-                  className={cn(
-                    munCard({ focusRing: 'default' }),
-                    'bg-[#8c89f0] rounded-xl relative hover:shadow-4',
-                  )}
-                >
+                <article className="bg-[#8c89f0] hover:shadow-4 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-backgroundbg-[#8c89f0] rounded-xl relative hover:shadow-4">
                   <Link
                     href="/"
                     className="absolute inset-0 w-full h-full z-10"
@@ -83,12 +76,7 @@ const HomeHero = () => {
                 </article>
               </div>
               <div className="hidden lg:block lg:col-span-1">
-                <article
-                  className={cn(
-                    munCard({ focusRing: 'default', overlay: 'default' }),
-                    'rounded-xl relative hover:shadow-4',
-                  )}
-                >
+                <article className="overflow-hidden transition-all focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background rounded-xl bg-transparent p-0 gap-0 relative flex flex-col justify-end bg-[linear-gradient(#0e0e0e00_48%,#0e0e0eab_100%)] h-full hover:shadow-4">
                   <Link
                     href="/ecommerce"
                     className="absolute inset-0 w-full h-full z-10"
