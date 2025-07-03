@@ -10,7 +10,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
       <Topnav />
       <Header />
       <Navbar />
-      <main className="space-y-10 py-4 md:space-y-14 lg:py-6 xl:space-y-20">
+      <main className="space-y-6 py-4 md:space-y-10 lg:py-6 xl:space-y-14">
         {children}
       </main>
       <Footer />
