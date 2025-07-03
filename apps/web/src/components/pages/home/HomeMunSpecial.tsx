@@ -111,10 +111,7 @@ const HomeMunSpecial = () => {
               <ApiError className="col-span-full" />
             ) : isLoading ? (
               [...Array(4)].map((_, index) => (
-                <Skeleton
-                  key={index}
-                  className="w-full h-44 rounded-xl lg:h-56"
-                />
+                <Skeleton key={index} className="w-full h-44 lg:h-56" />
               ))
             ) : (
               <React.Fragment>
@@ -122,7 +119,6 @@ const HomeMunSpecial = () => {
                   <Card
                     className={cn(
                       munCard({ focusRing: 'default', overlay: 'default' }),
-                      'rounded-xl',
                     )}
                     key={i}
                   >
@@ -140,7 +136,7 @@ const HomeMunSpecial = () => {
                       blurDataURL={rgbDataURL(i)}
                       placeholder="blur"
                       loading="lazy"
-                      className="w-full h-full rounded-xl object-cover -z-10"
+                      className="w-full h-full object-cover -z-10"
                     />
                     <div className="absolute bottom-0 left-0 p-2 w-full">
                       <Text weight="medium" className="text-white line-clamp-2">
@@ -157,12 +153,15 @@ const HomeMunSpecial = () => {
               <ApiError />
             ) : isLoading ? (
               [...Array(6)].map((_, index) => (
-                <Skeleton key={index} className="w-full h-36 rounded-xl" />
+                <Skeleton key={index} className="w-full h-36" />
               ))
             ) : (
               <React.Fragment>
                 {productCards.map(({ image, price, originalPrice }, i) => (
-                  <Card className="rounded-xl p-0 relative h-36 group" key={i}>
+                  <Card
+                    className="overflow-hidden p-0 relative h-36 group"
+                    key={i}
+                  >
                     <Link
                       href="/"
                       className="absolute inset-0 w-full h-full z-10"
@@ -176,7 +175,7 @@ const HomeMunSpecial = () => {
                       blurDataURL={rgbDataURL(i)}
                       placeholder="blur"
                       loading="lazy"
-                      className="max-w-full h-full rounded-xl object-cover"
+                      className="max-w-full h-full object-cover"
                     />
                     <div className="absolute bottom-2 left-2">
                       <Badge
@@ -206,19 +205,23 @@ const HomeMunSpecial = () => {
                 <ApiError />
               ) : isLoading ? (
                 [...Array(5)].map((_, index) => (
-                  <Skeleton key={index} className="w-full h-24 rounded-xl" />
+                  <Skeleton key={index} className="w-full h-24" />
                 ))
               ) : (
                 <React.Fragment>
                   {specialCards.map((item, i) => (
-                    <Link
+                    <Card
                       key={i}
-                      href="/"
                       className={cn(
-                        'bg-card rounded-xl border shadow-sm p-2 hover:shadow-4',
+                        'p-2 relative hover:shadow-4',
                         munCard({ focusRing: 'default' }),
                       )}
                     >
+                      <Link
+                        href="/"
+                        className="absolute inset-0 w-full h-full z-10"
+                        title={item.title}
+                      />
                       <div className="flex items-center gap-2">
                         <Image
                           src={item.image.src}
@@ -237,7 +240,7 @@ const HomeMunSpecial = () => {
                           </Text>
                         </div>
                       </div>
-                    </Link>
+                    </Card>
                   ))}
                 </React.Fragment>
               )}
