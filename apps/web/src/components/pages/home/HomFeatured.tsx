@@ -74,14 +74,11 @@ const HomFeatured = () => {
               <ApiError />
             ) : isLoading ? (
               [...Array(10)].map((_, i) => (
-                <Skeleton key={i} className="w-full h-56 rounded-xl" />
+                <Skeleton key={i} className="w-full h-56" />
               ))
             ) : (
               featuredItems.map((item, i) => (
-                <Card
-                  key={i}
-                  className="overflow-hidden relative p-0 rounded-xl group"
-                >
+                <Card key={i} className="overflow-hidden relative p-0 group">
                   <Link
                     href="/"
                     className="absolute inset-0 w-full h-full z-10"
@@ -96,7 +93,7 @@ const HomFeatured = () => {
                     blurDataURL={rgbDataURL(i)}
                     placeholder="blur"
                     loading="lazy"
-                    className="w-full h-full aspect-square object-cover rounded-xl"
+                    className="w-full h-full aspect-square object-cover"
                   />
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
                     <Button variant="secondary" className="rounded-full gap-0">
