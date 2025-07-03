@@ -4,8 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Text from '@repo/ui/components/text';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
-import { cn } from '@repo/ui/lib/utils';
-import { ui } from '../../ui';
 
 const specialItems = [
   {
@@ -42,44 +40,49 @@ const specialItems = [
 
 const HomeSpecialPrice = () => {
   return (
-    <>
-      <section>
-        <div className="container">
-          <div className="space-y-6">
-            <Heading as="h4">
-              Shop extraordinary items at special prices
-            </Heading>
-            <div className="grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-              {specialItems.map((item, i) => (
-                <article
-                  key={item.id}
-                  className={cn(ui({ focusRing: 'default' }), 'sm:mun-card')}
-                >
-                  <Link href="/" className="block w-full">
-                    <div className="space-y-2">
-                      <Image
-                        src={item.imageSrc}
-                        alt={item.title}
-                        width={300}
-                        height={300}
-                        blurDataURL={rgbDataURL(i)}
-                        placeholder="blur"
-                        loading="lazy"
-                        className="w-full h-full object-cover rounded-xl block mx-auto"
-                      />
-                      <div>
-                        <Text weight="semibold">{item.title}</Text>
-                        <Text weight="semibold">{item.discount}</Text>
-                      </div>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
+    <section aria-labelledby="special-prices-heading">
+      <div className="container">
+        <div className="space-y-6">
+          <Heading as="h4" id="special-prices-heading">
+            Shop extraordinary items at special prices
+          </Heading>
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {specialItems.map((item, i) => (
+              <article
+                key={item.id}
+                className="relative focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-8 focus-within:ring-offset-background sm:mun-card"
+                aria-label={item.title}
+              >
+                <Link
+                  href="/"
+                  className="absolute inset-0 w-full h-full z-10"
+                  title={item.title}
+                  aria-label={`View details for ${item.title}`}
+                />
+                <div className="space-y-2">
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.title}
+                    width={600}
+                    height={600}
+                    blurDataURL={rgbDataURL(i)}
+                    placeholder="blur"
+                    loading="lazy"
+                    className="w-full h-full aspect-square object-cover rounded-xl"
+                  />
+                  <div>
+                    <Text weight="semibold">{item.title}</Text>
+                    <Text weight="semibold" aria-hidden="true">
+                      {item.discount}
+                    </Text>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

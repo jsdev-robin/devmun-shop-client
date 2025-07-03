@@ -10,8 +10,8 @@ import { Badge } from '@repo/ui/components/badge';
 import Text from '@repo/ui/components/text';
 import Heading from '@repo/ui/components/heading';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
-import { munCard } from '../../ui/mun-shop';
 import AddToWishlist from '../../ui/product/AddToWishlist';
+import { Card } from '@repo/ui/components/card';
 
 const products = [
   {
@@ -73,10 +73,9 @@ const HomeAnyBudget = () => {
             <Heading as="h4">Original Finds for Any Budget</Heading>
           </div>
           {products.map((item, i) => (
-            <article
+            <Card
               className={cn(
-                munCard({ focusRing: 'default' }),
-                'relative overflow-hidden rounded-xl group',
+                'overflow-hidden p-0 transition-all focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background relative group',
                 i === 2 && 'lg:col-span-2 lg:row-span-2',
               )}
               key={item.id}
@@ -145,7 +144,7 @@ const HomeAnyBudget = () => {
                   <Play />
                 </Button>
               )}
-            </article>
+            </Card>
           ))}
         </div>
       </div>
