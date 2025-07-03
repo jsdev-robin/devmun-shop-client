@@ -22,7 +22,7 @@ const fabVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        sm: 'w-10 h-10 rounded-full',
+        sm: 'w-9 h-9 rounded-full',
         md: 'w-12 h-12 rounded-full',
         lg: 'w-14 h-14 rounded-full',
         extended: 'h-9 px-4 py-2 has-[>svg]:px-3 rounded-full',
@@ -30,7 +30,7 @@ const fabVariants = cva(
     },
     defaultVariants: {
       variant: 'default',
-      size: 'md',
+      size: 'sm',
     },
   },
 );
