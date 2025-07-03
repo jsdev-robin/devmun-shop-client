@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@repo/ui/components/button';
 import Heading from '@repo/ui/components/heading';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
@@ -12,6 +11,7 @@ import SkeletonHeading from '@repo/ui/components/skeleton-heading';
 import ApiError from '@repo/ui/components/api-error';
 import { Card } from '@repo/ui/components/card';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
+import { Fab } from '@repo/ui/components/fab';
 
 const featuredItems = [
   {
@@ -96,12 +96,12 @@ const HomFeatured = () => {
                     className="w-full h-full aspect-square object-cover"
                   />
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
-                    <Button variant="secondary" className="rounded-full gap-0">
+                    <Fab variant="secondary" size="extended" className="gap-0">
                       {truncate(item.title, 15)}
                       <span className="overflow-hidden transition-all w-0 -translate-x-2 group-hover:translate-x-0 group-hover:ml-2 group-hover:w-4">
                         <ArrowRight />
                       </span>
-                    </Button>
+                    </Fab>
                   </div>
                 </Card>
               ))
