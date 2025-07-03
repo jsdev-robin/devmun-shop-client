@@ -11,8 +11,8 @@ import { Play } from 'lucide-react';
 import { Badge } from '@repo/ui/components/badge';
 import { useBreakpoint } from '@repo/ui/hooks/use-breakpoint';
 import { rgbDataURL } from '@repo/ui/lib/rgbDataURL';
-import { munCard } from '../../ui/mun-shop';
 import AddToWishlist from '../../ui/product/AddToWishlist';
+import { Card } from '@repo/ui/components/card';
 
 const products = [
   {
@@ -77,11 +77,10 @@ const HomeShopGift = () => {
               </div>
             </div>
             {products.map((item, i) => (
-              <article
+              <Card
                 key={item.id}
                 className={cn(
-                  munCard({ focusRing: 'default' }),
-                  'relative overflow-hidden rounded-xl group',
+                  'overflow-hidden p-0 transition-all focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background relative group',
                 )}
               >
                 <Link
@@ -149,7 +148,7 @@ const HomeShopGift = () => {
                     <Play />
                   </Button>
                 )}
-              </article>
+              </Card>
             ))}
           </div>
           {isSm && (
