@@ -39,7 +39,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Stocks',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
@@ -66,7 +66,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Price',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
@@ -93,7 +93,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Rating',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
@@ -120,7 +120,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Last Update',
         meta: {
-          filterVariant: 'date',
+          filterVariant: 'text',
         },
       },
     ],
