@@ -38,6 +38,7 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
+    columnResizeMode: 'onChange',
     state: {
       columnOrder,
       sorting,

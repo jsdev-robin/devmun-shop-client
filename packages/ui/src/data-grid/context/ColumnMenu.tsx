@@ -18,6 +18,7 @@ import { Separator } from '../../components/separator';
 import { PinIcon, PinOff } from 'lucide-react';
 import { useDataLayoutContext } from '../context/data-layout-context';
 import { cn } from '../../lib/utils';
+import { Fab } from '../../components/fab';
 
 const ColumnMenu = <T,>({
   header,
@@ -33,17 +34,17 @@ const ColumnMenu = <T,>({
   return header.column.getCanFilter() ? (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="secondary"
-          size="icon"
+        <Fab
+          size="xs"
+          variant="ghost"
           disabled={isError || isLoading}
           className={cn(
-            'rounded-full cursor-pointer size-6 hover:bg-card data-[state=open]:opacity-100 data-[state=open]:bg-card',
+            'hover:bg-card cursor-pointer data-[state=open]:opacity-100 data-[state=open]:bg-card',
             className,
           )}
         >
           <DotsVerticalIcon />
-        </Button>
+        </Fab>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-60 p-1.5">
         <Button

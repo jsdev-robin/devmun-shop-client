@@ -22,6 +22,7 @@ const fabVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
+        xs: 'w-6 h-6 rounded-full',
         sm: 'w-9 h-9 rounded-full',
         md: 'w-12 h-12 rounded-full',
         lg: 'w-14 h-14 rounded-full',
