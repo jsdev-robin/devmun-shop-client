@@ -287,7 +287,12 @@ const ProductCreate = () => {
                         name="inventory.barcode"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Bardcode (Optional)</FormLabel>
+                            <FormLabel>
+                              Bardcode{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
@@ -311,7 +316,12 @@ const ProductCreate = () => {
                         name="inventory.batchNumber"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Batch Number (Optional)</FormLabel>
+                            <FormLabel>
+                              Batch Number{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>
@@ -324,7 +334,12 @@ const ProductCreate = () => {
                         name="inventory.expiryDate"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Expiry Date (Optional)</FormLabel>
+                            <FormLabel>
+                              Expiry Date{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <DatePicker
                                 onChange={field.onChange}
@@ -341,7 +356,12 @@ const ProductCreate = () => {
                         name="inventory.warehouseLocation"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Warehouse Location (Optional)</FormLabel>
+                            <FormLabel>
+                              Warehouse Location{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>
@@ -376,7 +396,12 @@ const ProductCreate = () => {
                         name="pricing.salePrice"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Sale price (Optional)</FormLabel>
+                            <FormLabel>
+                              Sale price{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -389,7 +414,12 @@ const ProductCreate = () => {
                         name="pricing.costPrice"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Cost price (Optional)</FormLabel>
+                            <FormLabel>
+                              Cost price{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -419,7 +449,12 @@ const ProductCreate = () => {
                         name="pricing.minOrderQuantity"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Minimum order qty (Optional)</FormLabel>
+                            <FormLabel>
+                              Minimum order qty{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -432,7 +467,12 @@ const ProductCreate = () => {
                         name="pricing.maxOrderQuantity"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Maximum order qty (Optional)</FormLabel>
+                            <FormLabel>
+                              Maximum order qty{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -445,7 +485,12 @@ const ProductCreate = () => {
                         name="pricing.taxInclusive"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Tax calculation (Optional)</FormLabel>
+                            <FormLabel>
+                              Tax calculation{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Combobox
                                 defaultValue={field.value}
@@ -471,7 +516,12 @@ const ProductCreate = () => {
                         name="pricing.taxAmount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Tax Ammout (Optional)</FormLabel>
+                            <FormLabel>
+                              Tax Ammout{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -484,7 +534,12 @@ const ProductCreate = () => {
                         name="pricing.discountType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Discount type (Optional)</FormLabel>
+                            <FormLabel>
+                              Discount type{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Combobox
                                 defaultValue={field.value}
@@ -510,7 +565,12 @@ const ProductCreate = () => {
                         name="pricing.discountValue"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Discount value (Optional)</FormLabel>
+                            <FormLabel>
+                              Discount value{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="number" {...field} />
                             </FormControl>
@@ -523,7 +583,12 @@ const ProductCreate = () => {
                         name="pricing.discountStartDate"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Discount Start (Optional)</FormLabel>
+                            <FormLabel>
+                              Discount Start{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <DatePicker
                                 onChange={field.onChange}
@@ -539,7 +604,12 @@ const ProductCreate = () => {
                         name="pricing.discountEndDate"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Discount End (Optional)</FormLabel>
+                            <FormLabel>
+                              Discount End{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <DatePicker
                                 onChange={field.onChange}
@@ -692,7 +762,12 @@ const ProductCreate = () => {
                         name="attributes.manufacturer"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Manufacturer (Optional)</FormLabel>
+                            <FormLabel>
+                              Manufacturer{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>
@@ -705,7 +780,12 @@ const ProductCreate = () => {
                         name="attributes.model"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Model (Optional)</FormLabel>
+                            <FormLabel>
+                              Model{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>
@@ -718,7 +798,12 @@ const ProductCreate = () => {
                         name="attributes.color"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Color (Optional)</FormLabel>
+                            <FormLabel>
+                              Color{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input type="color" {...field} />
                             </FormControl>
@@ -731,7 +816,12 @@ const ProductCreate = () => {
                         name="attributes.size"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Size (Optional)</FormLabel>
+                            <FormLabel>
+                              Size{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Combobox options={dummySize} {...field} />
                             </FormControl>
@@ -744,7 +834,12 @@ const ProductCreate = () => {
                         name="attributes.material"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Material (Optional)</FormLabel>
+                            <FormLabel>
+                              Material{' '}
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                (Optional)
+                              </span>
+                            </FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>
@@ -752,24 +847,16 @@ const ProductCreate = () => {
                           </FormItem>
                         )}
                       />
-                      {/* <FormField
-                        control={form.control}
-                        name="attributes.weight"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Weight (Optional)</FormLabel>
-                            <FormControl>
-                              <Input type="number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      /> */}
                       <div className="col-span-full">
                         <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
                           <Card>
                             <CardHeader>
-                              <CardTitle>Dimensions (Optional)</CardTitle>
+                              <CardTitle>
+                                Dimensions{' '}
+                                <span className="text-xs font-semibold text-muted-foreground">
+                                  (Optional)
+                                </span>
+                              </CardTitle>
                             </CardHeader>
                             <CardContent>
                               <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
@@ -840,7 +927,12 @@ const ProductCreate = () => {
                           </Card>
                           <Card>
                             <CardHeader>
-                              <CardTitle>Warranty (Optional)</CardTitle>
+                              <CardTitle>
+                                Warranty{' '}
+                                <span className="text-xs font-semibold text-muted-foreground">
+                                  (Optional)
+                                </span>
+                              </CardTitle>
                             </CardHeader>
                             <CardContent>
                               <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
@@ -1145,7 +1237,12 @@ const ProductCreate = () => {
                   </Card>
                   <Card>
                     <CardHeader>
-                      <CardTitle>Shipping (Optional)</CardTitle>
+                      <CardTitle>
+                        Shipping{' '}
+                        <span className="text-xs font-semibold text-muted-foreground">
+                          (Optional)
+                        </span>
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-6">
