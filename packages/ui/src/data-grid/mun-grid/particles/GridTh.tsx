@@ -4,6 +4,8 @@ import React, { CSSProperties } from 'react';
 import { Header } from '@tanstack/react-table';
 import { Th } from '../../../components/flex-table';
 import ColumnSort from '../../common/ColumnSort';
+import DndIndicator from '../../common/DndIndicator';
+import ColumnMenu from '../../context/ColumnMenu';
 
 const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
   const style: CSSProperties = {
@@ -18,6 +20,10 @@ const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
           <div className="space-y-2 w-full">
             <div className="p-2 flex items-center justify-between gap-2">
               <ColumnSort header={header} />
+              <div className="flex items-center gap-2">
+                <DndIndicator header={header} />
+                <ColumnMenu header={header} />
+              </div>
             </div>
           </div>
         </>

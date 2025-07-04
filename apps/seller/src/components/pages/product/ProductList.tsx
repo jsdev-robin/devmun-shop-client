@@ -16,6 +16,24 @@ const ProductList = () => {
   const columns = useMemo<ColumnDef<Product, unknown>[]>(
     () => [
       {
+        accessorKey: 'item',
+        id: 'item',
+        cell: (info) => info.getValue(),
+        header: 'Item',
+        meta: {
+          filterVariant: 'text',
+        },
+      },
+      {
+        accessorKey: 'category',
+        id: 'category',
+        cell: (info) => info.getValue(),
+        header: 'Category',
+        meta: {
+          filterVariant: 'text',
+        },
+      },
+      {
         accessorKey: 'stocks',
         id: 'stocks',
         cell: (info) => info.getValue(),
@@ -24,9 +42,7 @@ const ProductList = () => {
           filterVariant: 'range',
         },
       },
-
       {
-        accessorFn: (row) => row.sku,
         accessorKey: 'sku',
         id: 'sku',
         cell: (info) => info.getValue(),
@@ -36,7 +52,6 @@ const ProductList = () => {
         },
       },
       {
-        accessorFn: (row) => row.barcode,
         accessorKey: 'barcode',
         id: 'barcode',
         cell: (info) => info.getValue(),
@@ -46,7 +61,6 @@ const ProductList = () => {
         },
       },
       {
-        accessorFn: (row) => row.price,
         accessorKey: 'price',
         id: 'price',
         cell: (info) => info.getValue(),
@@ -56,7 +70,6 @@ const ProductList = () => {
         },
       },
       {
-        accessorFn: (row) => row.salesPerDay,
         accessorKey: 'salesPerDay',
         id: 'salesPerDay',
         cell: (info) => info.getValue(),
@@ -66,7 +79,6 @@ const ProductList = () => {
         },
       },
       {
-        accessorFn: (row) => row.salesPerMonth,
         accessorKey: 'salesPerMonth',
         id: 'salesPerMonth',
         cell: (info) => info.getValue(),
@@ -76,7 +88,15 @@ const ProductList = () => {
         },
       },
       {
-        accessorFn: (row) => row.totalSales,
+        accessorKey: 'rating',
+        id: 'rating',
+        cell: (info) => info.getValue(),
+        header: 'Rating',
+        meta: {
+          filterVariant: 'range',
+        },
+      },
+      {
         accessorKey: 'totalSales',
         id: 'totalSales',
         cell: (info) => info.getValue(),
@@ -85,9 +105,28 @@ const ProductList = () => {
           filterVariant: 'number',
         },
       },
+      {
+        accessorKey: 'revenue',
+        id: 'revenue',
+        cell: (info) => info.getValue(),
+        header: 'Revenue',
+        meta: {
+          filterVariant: 'range',
+        },
+      },
+      {
+        accessorKey: 'lastUpdate',
+        id: 'lastUpdate',
+        cell: (info) => info.getValue(),
+        header: 'Last Update',
+        meta: {
+          filterVariant: 'date',
+        },
+      },
     ],
     [],
   );
+
   const { data, isError, isLoading, isFetching } = useGetProductQuery({});
 
   return (

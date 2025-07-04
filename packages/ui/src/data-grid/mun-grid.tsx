@@ -7,6 +7,7 @@ import {
   getSortedRowModel,
   SortingState,
   useReactTable,
+  VisibilityState,
 } from '@tanstack/react-table';
 import { DataLayoutProvider } from './context/data-layout-context';
 import MainGrid from './mun-grid/particles/MainGrid';
@@ -25,6 +26,10 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
     columns.map((c) => c.id!),
   );
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    pin: false,
+    'drag-handle': false,
+  });
 
   const table = useReactTable({
     data,
@@ -32,9 +37,11 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       columnOrder,
       sorting,
+      columnVisibility,
     },
   });
 
