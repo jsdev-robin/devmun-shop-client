@@ -20,18 +20,27 @@ const ProductList = () => {
         id: 'item',
         cell: (info) => info.getValue(),
         header: 'Item',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'category',
         id: 'category',
         cell: (info) => info.getValue(),
         header: 'Category',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'stocks',
         id: 'stocks',
         cell: (info) => info.getValue(),
         header: 'Stocks',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'sku',
@@ -56,24 +65,36 @@ const ProductList = () => {
         id: 'price',
         cell: (info) => info.getValue(),
         header: 'Price',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'salesPerDay',
         id: 'salesPerDay',
         cell: (info) => info.getValue(),
         header: 'Daily Sales',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'salesPerMonth',
         id: 'salesPerMonth',
         cell: (info) => info.getValue(),
         header: 'Monthly Sales',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'rating',
         id: 'rating',
         cell: (info) => info.getValue(),
         header: 'Rating',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'totalSales',
@@ -89,12 +110,18 @@ const ProductList = () => {
         id: 'revenue',
         cell: (info) => info.getValue(),
         header: 'Revenue',
+        meta: {
+          filterVariant: 'text',
+        },
       },
       {
         accessorKey: 'lastUpdate',
         id: 'lastUpdate',
         cell: (info) => info.getValue(),
         header: 'Last Update',
+        meta: {
+          filterVariant: 'text',
+        },
       },
     ],
     [],
