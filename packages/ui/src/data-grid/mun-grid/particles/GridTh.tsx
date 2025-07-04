@@ -7,6 +7,7 @@ import ColumnSort from '../../common/ColumnSort';
 import DndIndicator from '../../common/DndIndicator';
 import ColumnMenu from '../../context/ColumnMenu';
 import ColumnResizeIndicator from '../../common/ColumnResizeIndicator';
+import ColumnFilter from '../../common/ColumnFIlter';
 
 const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
   const style: CSSProperties = {
@@ -26,7 +27,7 @@ const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
                 <ColumnMenu header={header} />
               </div>
             </div>
-            {/* <ColumnFilter column={header.column} /> */}
+            <ColumnFilter column={header.column} />
           </div>
           <ColumnResizeIndicator header={header} />
         </>

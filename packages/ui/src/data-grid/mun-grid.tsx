@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import {
   ColumnDef,
+  ColumnFiltersState,
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
@@ -25,6 +26,8 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     columns.map((c) => c.id!),
   );
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     pin: false,
@@ -38,11 +41,13 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
     columnResizeMode: 'onChange',
     state: {
       columnOrder,
       sorting,
       columnVisibility,
+      columnFilters,
     },
   });
 
