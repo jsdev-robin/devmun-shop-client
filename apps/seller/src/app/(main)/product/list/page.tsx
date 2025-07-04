@@ -1,10 +1,10 @@
 import React from 'react';
-import ProductCreate from '../../../../components/pages/product/ProductCreate';
+import ProductList from '../../../../components/pages/product/ProductList';
 
 const ProductCreatePage = () => {
   return (
     <>
-      <ProductCreate />
+      <ProductList />
     </>
   );
 };

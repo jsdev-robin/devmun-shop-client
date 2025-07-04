@@ -6,6 +6,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { Toaster } from '@repo/ui/components/sonner';
 import Script from 'next/script';
 import { AppProvider } from '../contexts/app-context';
+import StoreProvider from './StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -97,15 +98,17 @@ export default function RootLayout({
           merriweather.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          // enableSystem
-          // disableTransitionOnChange
-        >
-          <AppProvider>{children}</AppProvider>
-          <Toaster position="top-center" richColors />
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            // enableSystem
+            // disableTransitionOnChange
+          >
+            <AppProvider>{children}</AppProvider>
+            <Toaster position="top-center" richColors />
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
