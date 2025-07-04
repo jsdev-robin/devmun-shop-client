@@ -4,6 +4,7 @@ import React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -215,35 +216,35 @@ const OrderReport = () => {
       <div className="container">
         <div className="grid gap-6 grid-cols-1 xl:grid-cols-5">
           <div className="h-full xl:col-span-3">
-            <Card className="pt-0 h-full">
-              <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
-                <div className="grid flex-1 gap-1">
-                  <CardTitle>Order Analytics</CardTitle>
-                  <CardDescription>
-                    Showing completed and cancelled orders for the last 3 months
-                  </CardDescription>
-                </div>
-                <Select value={timeRange} onValueChange={setTimeRange}>
-                  <SelectTrigger
-                    className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
-                    aria-label="Select a value"
-                  >
-                    <SelectValue placeholder="Last 3 months" />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-xl">
-                    <SelectItem value="90d" className="rounded-lg">
-                      Last 3 months
-                    </SelectItem>
-                    <SelectItem value="30d" className="rounded-lg">
-                      Last 30 days
-                    </SelectItem>
-                    <SelectItem value="7d" className="rounded-lg">
-                      Last 7 days
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle>Order Analytics</CardTitle>
+                <CardDescription>
+                  Showing completed and cancelled orders for the last 3 months
+                </CardDescription>
+                <CardAction>
+                  <Select value={timeRange} onValueChange={setTimeRange}>
+                    <SelectTrigger
+                      className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
+                      aria-label="Select a value"
+                    >
+                      <SelectValue placeholder="Last 3 months" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl">
+                      <SelectItem value="90d" className="rounded-lg">
+                        Last 3 months
+                      </SelectItem>
+                      <SelectItem value="30d" className="rounded-lg">
+                        Last 30 days
+                      </SelectItem>
+                      <SelectItem value="7d" className="rounded-lg">
+                        Last 7 days
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </CardAction>
               </CardHeader>
-              <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 h-full">
+              <CardContent className="h-full">
                 <ChartContainer
                   config={chartConfig}
                   className="aspect-auto h-64 w-full xl:h-full"
@@ -339,15 +340,15 @@ const OrderReport = () => {
           <div className="xl:col-span-2">
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between gap-4">
-                  <CardTitle>Order Insights</CardTitle>
+                <CardTitle>Order Insights</CardTitle>
+                <CardAction>
                   <Link
                     className={cn(buttonVariants({ variant: 'link' }))}
                     href="/seller/dashboard/order/list"
                   >
                     All orders
                   </Link>
-                </div>
+                </CardAction>
               </CardHeader>
               <CardContent>
                 <Table className="scroll-thin">
