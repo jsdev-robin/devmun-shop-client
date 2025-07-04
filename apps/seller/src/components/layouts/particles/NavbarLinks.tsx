@@ -1,50 +1,57 @@
-import { ShoppingCart, Package, ClipboardList, Star, Percent, Store } from 'lucide-react';
+import {
+  ShoppingCart,
+  Package,
+  ClipboardList,
+  Star,
+  Percent,
+  Store,
+} from 'lucide-react';
 
 export const NavbarLinks = [
   {
     label: 'Overview',
-    href: '/seller/dashboard',
+    href: '/',
     icon: ShoppingCart,
   },
   {
     label: 'Products',
     icon: Package,
     submenu: [
-      { label: 'Overview', href: '/seller/dashboard/product/list' },
-      { label: 'Add Product', href: '/seller/dashboard/product/create' },
+      { label: 'Overview', href: '/product/list' },
+      { label: 'Add Product', href: '/product/create' },
     ],
   },
   {
     label: 'Orders',
     icon: ClipboardList,
     submenu: [
-      { label: 'Overview', href: '/seller/dashboard/order/list' },
+      { label: 'Overview', href: '/order/list' },
       {
         label: 'Purchase Orders',
-        href: '/seller/dashboard/order/purchase-orders',
+        href: '/order/purchase-orders',
         badge: { content: 'New', className: 'bg-primary/25 text-primary' },
       },
       {
         label: 'Order Details',
-        href: '/seller/dashboard/order/details/dfdfdf',
+        href: '/order/details/dfdfdf',
       },
     ],
   },
   {
     label: 'Reviews',
-    href: '/seller/dashboard/review/list',
+    href: '/review/list',
     icon: Star,
   },
   {
     label: 'Discounts',
-    href: '/seller/dashboard/discounts',
+    href: '/discounts',
     icon: Percent,
   },
   {
     label: 'Store',
     icon: Store,
     submenu: [
-      { label: 'Overview', href: '/seller/dashboard/store' },
+      { label: 'Overview', href: '/store' },
       { label: 'Payouts', href: '/' },
     ],
   },
