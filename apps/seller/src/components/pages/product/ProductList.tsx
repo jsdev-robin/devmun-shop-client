@@ -75,7 +75,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Daily Sales',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
@@ -84,7 +84,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Monthly Sales',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
@@ -111,7 +111,7 @@ const ProductList = () => {
         cell: (info) => info.getValue(),
         header: 'Revenue',
         meta: {
-          filterVariant: 'range',
+          filterVariant: 'text',
         },
       },
       {
