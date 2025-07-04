@@ -6,7 +6,6 @@ import { Th } from '../../../components/flex-table';
 import ColumnSort from '../../common/ColumnSort';
 import DndIndicator from '../../common/DndIndicator';
 import ColumnMenu from '../../context/ColumnMenu';
-import ColumnFilter from '../../common/ColumnFIlter';
 import ColumnResizeIndicator from '../../common/ColumnResizeIndicator';
 
 const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
@@ -27,7 +26,7 @@ const GridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
                 <ColumnMenu header={header} />
               </div>
             </div>
-            <ColumnFilter column={header.column} />
+            {/* <ColumnFilter column={header.column} /> */}
           </div>
           <ColumnResizeIndicator header={header} />
         </>
