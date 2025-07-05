@@ -14,6 +14,7 @@ import { DataLayoutProvider } from './context/data-layout-context';
 import MainGrid from './mun-grid/particles/MainGrid';
 import ColumnDnd from './context/column-dnd';
 import Toolbar from './toolbar/Index';
+import GridRowNumber from './mun-grid/particles/GridRowNumber';
 
 interface MunGridProps<T> {
   data?: T[];
@@ -69,6 +70,7 @@ const MunGrid = <T,>({
         <div>
           <div className="space-y-3 relative">
             <div className="flex bg-muted rounded-md overflow-hidden border border-border">
+              <GridRowNumber />
               <div className="overflow-hidden flex-1">
                 <MainGrid />
               </div>

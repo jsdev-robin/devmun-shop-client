@@ -26,6 +26,16 @@ const ProductList = () => {
         // enableColumnFilter: false,
       },
       {
+        id: 'drag-handle',
+        size: 36,
+      },
+      {
+        id: 'pin',
+        header: () => 'Pin',
+        size: 60,
+        maxSize: 60,
+      },
+      {
         id: 'select',
         header: ({ table }) => (
           <div>
