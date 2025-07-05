@@ -35,6 +35,8 @@ interface DataGridContexttValue<T> {
   paneRef2: React.RefObject<HTMLDivElement | null>;
   headerRef: (node: HTMLElement | null) => void;
   cellRef: (node: HTMLElement | null) => void;
+  split: boolean;
+  setSplit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
@@ -45,6 +47,7 @@ interface DataGridProviderProps<T> {
   columns: ColumnDef<T>[];
   isLoading?: boolean;
   isError?: boolean;
+  isSplit?: boolean;
 }
 
 export const DataGridProvider = <T,>({
@@ -53,6 +56,7 @@ export const DataGridProvider = <T,>({
   columns,
   isLoading,
   isError,
+  isSplit = false,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -98,6 +102,8 @@ export const DataGridProvider = <T,>({
     },
   });
 
+  const [split, setSplit] = useState<boolean>(isSplit);
+
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
   const { ref: cellRef } = useElementDimensions({ h: '--cell-h' });
@@ -118,6 +124,8 @@ export const DataGridProvider = <T,>({
       paneRef2,
       cellRef,
       headerRef,
+      split,
+      setSplit,
     }),
     [
       columnOrder,
@@ -128,6 +136,8 @@ export const DataGridProvider = <T,>({
       paneRef2,
       cellRef,
       headerRef,
+      split,
+      setSplit,
     ],
   );
 
