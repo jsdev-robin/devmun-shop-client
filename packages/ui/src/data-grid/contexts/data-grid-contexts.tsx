@@ -33,6 +33,11 @@ interface DataGridContexttValue<T> {
 
   paneRef1: React.RefObject<HTMLDivElement | null>;
   paneRef2: React.RefObject<HTMLDivElement | null>;
+  paneRef3: React.RefObject<HTMLDivElement | null>;
+  paneRef4: React.RefObject<HTMLDivElement | null>;
+  paneRef5: React.RefObject<HTMLDivElement | null>;
+  paneRef6: React.RefObject<HTMLDivElement | null>;
+  paneRef7: React.RefObject<HTMLDivElement | null>;
   headerRef: (node: HTMLElement | null) => void;
   cellRef: (node: HTMLElement | null) => void;
   split: boolean;
@@ -106,12 +111,32 @@ export const DataGridProvider = <T,>({
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
+  const paneRef3 = useRef<HTMLDivElement>(null);
+  const paneRef4 = useRef<HTMLDivElement>(null);
+  const paneRef5 = useRef<HTMLDivElement>(null);
+  const paneRef6 = useRef<HTMLDivElement>(null);
+  const paneRef7 = useRef<HTMLDivElement>(null);
   const { ref: cellRef } = useElementDimensions({ h: '--cell-h' });
   const { ref: headerRef } = useElementDimensions({ h: '--header-h' });
 
   useSyncScroll({
     refs: [paneRef1, paneRef2],
     axis: 'x',
+  });
+
+  useSyncScroll({
+    refs: [paneRef4, paneRef6],
+    axis: 'x',
+  });
+
+  useSyncScroll({
+    refs: [paneRef5, paneRef7],
+    axis: 'x',
+  });
+
+  useSyncScroll({
+    refs: [paneRef2, paneRef3, paneRef6, paneRef7],
+    axis: 'y',
   });
 
   const contextValue = useMemo(
@@ -122,6 +147,11 @@ export const DataGridProvider = <T,>({
       isError,
       paneRef1,
       paneRef2,
+      paneRef3,
+      paneRef4,
+      paneRef5,
+      paneRef6,
+      paneRef7,
       cellRef,
       headerRef,
       split,
@@ -134,6 +164,11 @@ export const DataGridProvider = <T,>({
       isError,
       paneRef1,
       paneRef2,
+      paneRef3,
+      paneRef4,
+      paneRef5,
+      paneRef6,
+      paneRef7,
       cellRef,
       headerRef,
       split,
