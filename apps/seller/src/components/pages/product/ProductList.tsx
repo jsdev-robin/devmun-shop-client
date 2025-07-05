@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import {
   Card,
@@ -14,6 +14,8 @@ import { useGetPersonsQuery } from '../../../lib/features/person/personEndpoints
 import IndeterminateCheckbox from '@repo/ui/components/IndeterminateCheckbox';
 import RowDragHandle from '@repo/ui/components/row-drag-handle';
 import RowPin from '@repo/ui/components/row-pin';
+import { buildQueryParams } from '@repo/ui/utils/buildQueryParams';
+import { ColumnFiltersState } from '@tanstack/react-table';
 
 const ProductList = () => {
   const columns = useMemo<ColumnDef<Person, unknown>[]>(
@@ -160,8 +162,13 @@ const ProductList = () => {
     ],
     [],
   );
+  const [query, setQuery] = useState<ColumnFiltersState>([]);
 
-  const { data, isError, isLoading, isFetching } = useGetPersonsQuery({});
+  const queryParams = buildQueryParams(query);
+
+  const { data, isError, isLoading, isFetching } = useGetPersonsQuery({
+    queryParams,
+  });
 
   return (
     <section>
@@ -175,8 +182,8 @@ const ProductList = () => {
               data={data?.data}
               columns={columns}
               isError={isError}
-              isLoading={isLoading}
-              isFetching={isFetching}
+              isLoading={isLoading || isFetching}
+              getQuery={setQuery}
             />
           </CardContent>
         </Card>

@@ -4,6 +4,7 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -53,6 +54,7 @@ interface DataGridProviderProps<T> {
   isLoading?: boolean;
   isError?: boolean;
   isSplit?: boolean;
+  getQuery?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
 }
 
 export const DataGridProvider = <T,>({
@@ -62,6 +64,7 @@ export const DataGridProvider = <T,>({
   isLoading,
   isError,
   isSplit = false,
+  getQuery,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -77,6 +80,14 @@ export const DataGridProvider = <T,>({
     pin: false,
     'drag-handle': false,
   });
+
+  console.log(columnFilters);
+
+  useEffect(() => {
+    if (getQuery) {
+      getQuery(columnFilters);
+    }
+  }, [columnFilters, getQuery]);
 
   const table = useReactTable({
     data,

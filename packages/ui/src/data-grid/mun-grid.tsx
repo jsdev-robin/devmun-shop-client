@@ -1,6 +1,6 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef, ColumnFiltersState } from '@tanstack/react-table';
 import { DataGridProvider } from './contexts/data-grid-contexts';
 import ColumnDnd from './contexts/data-grid-column-dnd';
 import MunGridMain from './mun-grid/mun-grid-main';
@@ -14,7 +14,7 @@ interface MunGridProps<T> {
   columns: ColumnDef<T>[];
   isError: boolean;
   isLoading: boolean;
-  isFetching: boolean;
+  getQuery?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
 }
 
 const MunGrid = <T,>({
@@ -22,6 +22,7 @@ const MunGrid = <T,>({
   columns,
   isError,
   isLoading,
+  getQuery,
 }: MunGridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
@@ -30,6 +31,7 @@ const MunGrid = <T,>({
       columns={columns}
       isLoading={isLoading}
       isError={isError}
+      getQuery={getQuery}
     >
       <ColumnDnd>
         <div className="space-y-3 relative">
