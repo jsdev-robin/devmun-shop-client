@@ -10,6 +10,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { cn } from '../../lib/utils';
 import GridHeaderDnd from '../header/grid-header-dnd';
 import GridHeaderResize from '../header/grid-header-resize';
+import { getPinStyles } from '../utils/getPinStyles';
 
 const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
   const { listeners, isDragging, setNodeRef, transform } = useSortable({
@@ -27,7 +28,7 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
       ? header.column.getSize()
       : undefined,
     flex: ['select'].includes(header.column.id) ? undefined : 1,
-    // ...getPinStyles(header.column),
+    ...getPinStyles(header.column),
   };
 
   return (

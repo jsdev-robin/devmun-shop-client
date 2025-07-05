@@ -6,6 +6,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Td } from '../../components/flex-table';
 import { cn } from '../../lib/utils';
+import { getPinStyles } from '../utils/getPinStyles';
 
 const MunGridTd = <T,>({
   cell,
@@ -25,6 +26,7 @@ const MunGridTd = <T,>({
     zIndex: isDragging ? 1 : 0,
     width: cell.column.getSize(),
     minWidth: cell.column.getSize(),
+    ...getPinStyles(cell.column),
   };
 
   return (
