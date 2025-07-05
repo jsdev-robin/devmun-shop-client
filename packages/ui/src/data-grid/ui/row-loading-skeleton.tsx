@@ -1,7 +1,7 @@
 import React from 'react';
 import { Column } from '@tanstack/react-table';
 import { Loader } from 'lucide-react';
-import { Skeleton } from '../components/skeleton';
+import { Skeleton } from '../../components/skeleton';
 
 const PREDEFINED_WIDTHS = [100, 60, 130, 80, 50, 70, 40, 120];
 

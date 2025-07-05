@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { useDataGrid } from '../contexts/data-grid-contexts';
 import { FlexTable, Tbody, Td, Tr } from '../../components/flex-table';
-import NoDataFoundMsg from '../../ui/no-data-found-msg';
+import NoDataFoundMsg from '../ui/no-data-found-msg';
 
 const MunGridNoData = () => {
   const { table } = useDataGrid();

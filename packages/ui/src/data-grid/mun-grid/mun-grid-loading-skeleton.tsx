@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import RowLoadingSkeleton from '../../ui/row-loading-skeleton';
 import { useDataGrid } from '../contexts/data-grid-contexts';
 import { Tbody, Td, Tr } from '../../components/flex-table';
 import { getPinStyles } from '../utils/getPinStyles';
+import RowLoadingSkeleton from '../ui/row-loading-skeleton';
 
 const GridLoadingSkeleton = () => {
   const { table, split } = useDataGrid();

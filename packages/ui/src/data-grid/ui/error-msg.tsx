@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ServerOff } from 'lucide-react';
-import { Button } from '../components/button';
+import { Button } from '../../components/button';
 
 const ErrorMsg = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);

@@ -1,4 +1,4 @@
-import ErrorMsg from '../../ui/error-msg';
+import ErrorMsg from '../ui/error-msg';
 
 const MunGridError = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import PlaceHolderIcon from '../icons/PlaceHolderIcon';
+import PlaceHolderIcon from '../../icons/PlaceHolderIcon';
 
 const NoDataFoundMsg = () => {
   return (
