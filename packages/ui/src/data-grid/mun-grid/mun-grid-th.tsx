@@ -11,6 +11,7 @@ import { cn } from '../../lib/utils';
 import GridHeaderDnd from '../header/grid-header-dnd';
 import GridHeaderResize from '../header/grid-header-resize';
 import { getPinStyles } from '../utils/getPinStyles';
+import GridHeaderMenu from '../header/grid-header-menu';
 
 const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
   const { listeners, isDragging, setNodeRef, transform } = useSortable({
@@ -47,6 +48,7 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
               <GridHeaderSort header={header} />
               <div className="flex items-center gap-1.5">
                 <GridHeaderDnd listeners={listeners} header={header} />
+                <GridHeaderMenu header={header} />
               </div>
             </div>
             <GridHeaderFilter column={header.column} />
