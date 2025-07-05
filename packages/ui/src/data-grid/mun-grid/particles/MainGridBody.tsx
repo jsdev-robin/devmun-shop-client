@@ -31,15 +31,18 @@ const MainGridBody = () => {
               key={row.id}
               className="*:border-r *:border-border h-10 data-[state=selected]:bg-blue-800/25"
             >
-              {row.getVisibleCells().map((cell) => (
-                <SortableContext
-                  key={cell.id}
-                  items={columnOrder || []}
-                  strategy={horizontalListSortingStrategy}
-                >
-                  <GridTd key={cell.id} cell={cell} />
-                </SortableContext>
-              ))}
+              {row
+                .getVisibleCells()
+                .filter((cell) => !['rowNumber'].includes(cell.column.id))
+                .map((cell) => (
+                  <SortableContext
+                    key={cell.id}
+                    items={columnOrder || []}
+                    strategy={horizontalListSortingStrategy}
+                  >
+                    <GridTd key={cell.id} cell={cell} />
+                  </SortableContext>
+                ))}
             </Tr>
           ))}
         </Tbody>

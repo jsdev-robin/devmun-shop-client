@@ -11,10 +11,46 @@ import {
 import MunGrid from '@repo/ui/data-grid/mun-grid';
 import { useGetProductQuery } from '../../../lib/features/products/productEndpoint';
 import { Product } from '../../../types/product';
+import IndeterminateCheckbox from '@repo/ui/components/IndeterminateCheckbox';
 
 const ProductList = () => {
   const columns = useMemo<ColumnDef<Product, unknown>[]>(
     () => [
+      {
+        accessorFn: (_row, index) => index + 1,
+        cell: ({ row }) => row.index + 1,
+        id: 'rowNumber',
+        header: '',
+        size: 54,
+        maxSize: 54,
+        // enableColumnFilter: false,
+      },
+      {
+        id: 'select',
+        header: ({ table }) => (
+          <div>
+            <IndeterminateCheckbox
+              checked={table.getIsAllRowsSelected()}
+              indeterminate={table.getIsSomeRowsSelected()}
+              onChange={table.getToggleAllRowsSelectedHandler()}
+              aria-label="Select all"
+            />
+          </div>
+        ),
+        cell: ({ row }) => (
+          <div>
+            <IndeterminateCheckbox
+              checked={row.getIsSelected()}
+              disabled={!row.getCanSelect()}
+              indeterminate={row.getIsSomeSelected()}
+              onChange={row.getToggleSelectedHandler()}
+              aria-label="Select row"
+            />
+          </div>
+        ),
+        size: 36,
+        maxSize: 36,
+      },
       {
         accessorKey: 'item',
         id: 'item',

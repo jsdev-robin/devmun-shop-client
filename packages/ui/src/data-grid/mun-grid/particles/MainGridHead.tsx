@@ -21,9 +21,11 @@ const MainGridHead = () => {
               items={columnOrder || []}
               strategy={horizontalListSortingStrategy}
             >
-              {headerGroup.headers.map((header) => (
-                <GridTh key={header.id} header={header} />
-              ))}
+              {headerGroup.headers
+                .filter((header) => !['rowNumber'].includes(header.column.id))
+                .map((header) => (
+                  <GridTh key={header.id} header={header} />
+                ))}
             </SortableContext>
           </Tr>
         ))}
