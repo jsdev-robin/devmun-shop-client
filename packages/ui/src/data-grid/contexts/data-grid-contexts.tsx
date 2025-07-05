@@ -83,8 +83,6 @@ export const DataGridProvider = <T,>({
     'drag-handle': false,
   });
 
-  console.log(columnFilters);
-
   useEffect(() => {
     if (getQuery) {
       getQuery(columnFilters);
