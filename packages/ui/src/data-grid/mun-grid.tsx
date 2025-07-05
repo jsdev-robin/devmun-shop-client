@@ -4,6 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { DataGridProvider } from './contexts/data-grid-contexts';
 import ColumnDnd from './contexts/data-grid-column-dnd';
 import MunGridMain from './mun-grid/mun-grid-main';
+import MunGridRowNumber from './mun-grid/mun-grid-row-number';
 
 interface MunGridProps<T> {
   data?: T[];
@@ -29,6 +30,7 @@ const MunGrid = <T,>({
       <ColumnDnd>
         <div className="space-y-3 relative">
           <div className="flex bg-muted rounded-md overflow-hidden border border-border">
+            <MunGridRowNumber />
             <div className="overflow-hidden flex-1">
               <MunGridMain />
             </div>

@@ -10,9 +10,7 @@ import { useDataGrid } from '../contexts/data-grid-contexts';
 import MunGridTh from './mun-grid-th';
 
 const MunGridHead = () => {
-  const { table, columnOrder, headerRef } = useDataGrid();
-
-  const split = false;
+  const { table, columnOrder, headerRef, split } = useDataGrid();
 
   return (
     <FlexTable ref={headerRef}>

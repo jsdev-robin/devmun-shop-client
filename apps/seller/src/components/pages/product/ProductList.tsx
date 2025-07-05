@@ -25,7 +25,6 @@ const ProductList = () => {
         header: '',
         size: 54,
         maxSize: 54,
-        enableColumnFilter: false,
       },
       {
         id: 'drag-handle',

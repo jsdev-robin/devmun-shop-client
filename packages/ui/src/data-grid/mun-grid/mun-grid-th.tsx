@@ -12,11 +12,13 @@ import GridHeaderDnd from '../header/grid-header-dnd';
 import GridHeaderResize from '../header/grid-header-resize';
 import { getPinStyles } from '../utils/getPinStyles';
 import GridHeaderMenu from '../header/grid-header-menu';
+import { useDataGrid } from '../contexts/data-grid-contexts';
 
 const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
   const { listeners, isDragging, setNodeRef, transform } = useSortable({
     id: header.column.id,
   });
+  const { split } = useDataGrid();
   const style: CSSProperties = {
     position: 'relative',
     transform: CSS.Translate.toString(transform),
@@ -29,7 +31,7 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
       ? header.column.getSize()
       : undefined,
     flex: ['select'].includes(header.column.id) ? undefined : 1,
-    ...getPinStyles(header.column),
+    ...(!split && getPinStyles(header.column)),
   };
 
   return (
