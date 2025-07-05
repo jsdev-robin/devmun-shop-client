@@ -25,7 +25,7 @@ const MunGridHead = () => {
                 strategy={horizontalListSortingStrategy}
               >
                 {headerGroup.headers
-                  // .filter((header) => !['rowNumber'].includes(header.column.id))
+                  .filter((header) => !['rowNumber'].includes(header.column.id))
                   .map((header) => (
                     <MunGridTh key={header.id} header={header} />
                   ))}

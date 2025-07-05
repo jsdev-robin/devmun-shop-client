@@ -34,6 +34,7 @@ interface DataGridContexttValue<T> {
   paneRef1: React.RefObject<HTMLDivElement | null>;
   paneRef2: React.RefObject<HTMLDivElement | null>;
   headerRef: (node: HTMLElement | null) => void;
+  cellRef: (node: HTMLElement | null) => void;
 }
 
 const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
@@ -99,6 +100,7 @@ export const DataGridProvider = <T,>({
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
+  const { ref: cellRef } = useElementDimensions({ h: '--cell-h' });
   const { ref: headerRef } = useElementDimensions({ h: '--header-h' });
 
   useSyncScroll({
@@ -114,6 +116,7 @@ export const DataGridProvider = <T,>({
       isError,
       paneRef1,
       paneRef2,
+      cellRef,
       headerRef,
     }),
     [
@@ -123,6 +126,7 @@ export const DataGridProvider = <T,>({
       isError,
       paneRef1,
       paneRef2,
+      cellRef,
       headerRef,
     ],
   );

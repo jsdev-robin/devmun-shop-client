@@ -10,7 +10,7 @@ import { FlexTable, Tbody, Tr } from '../../components/flex-table';
 import MunGridTd from './mun-grid-td';
 
 const MunGridBody = () => {
-  const { table, columnOrder } = useDataGrid();
+  const { table, columnOrder, cellRef } = useDataGrid();
 
   const split = false;
 
@@ -19,12 +19,13 @@ const MunGridBody = () => {
       <Tbody>
         {table.getRowModel().rows.map((row) => (
           <Tr
+            ref={cellRef}
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
             className="*:border-r *:border-border h-10 data-[state=selected]:bg-blue-800/25"
           >
             {(split ? row.getCenterVisibleCells() : row.getVisibleCells())
-              // .filter((cell) => !['rowNumber'].includes(cell.column.id))
+              .filter((cell) => !['rowNumber'].includes(cell.column.id))
               .map((cell) => (
                 <SortableContext
                   key={cell.id}
