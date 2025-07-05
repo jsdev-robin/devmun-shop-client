@@ -21,6 +21,8 @@ import {
   VisibilityState,
 } from '@tanstack/react-table';
 import useSyncScroll from '../hooks/useSyncScroll';
+import { useElementDimensions } from '../hooks/useElementDimensions';
+import { getAllLeafColumnIds } from '../../lib/getAllLeafColumnIds';
 
 interface DataGridContexttValue<T> {
   table: Table<T>;
@@ -31,6 +33,7 @@ interface DataGridContexttValue<T> {
 
   paneRef1: React.RefObject<HTMLDivElement | null>;
   paneRef2: React.RefObject<HTMLDivElement | null>;
+  headerRef: (node: HTMLElement | null) => void;
 }
 
 const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
@@ -51,7 +54,7 @@ export const DataGridProvider = <T,>({
   isError,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
-    columns.map((c) => c.id!),
+    getAllLeafColumnIds(columns),
   );
   const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -72,14 +75,15 @@ export const DataGridProvider = <T,>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    onGlobalFilterChange: setGlobalFilter,
     onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: setRowSelection,
-    onPaginationChange: setPagination,
+    onGlobalFilterChange: setGlobalFilter,
     onColumnVisibilityChange: setColumnVisibility,
+    onPaginationChange: setPagination,
+    onRowSelectionChange: setRowSelection,
     columnResizeMode: 'onChange',
     enableRowSelection: true,
     manualPagination: true,
+
     state: {
       columnFilters,
       globalFilter,
@@ -88,10 +92,14 @@ export const DataGridProvider = <T,>({
       pagination,
       columnVisibility,
     },
+    defaultColumn: {
+      minSize: 180,
+    },
   });
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
+  const { ref: headerRef } = useElementDimensions({ h: '--header-h' });
 
   useSyncScroll({
     refs: [paneRef1, paneRef2],
@@ -100,27 +108,32 @@ export const DataGridProvider = <T,>({
 
   const contextValue = useMemo(
     () => ({
-      table,
       columnOrder,
       setColumnOrder,
       isLoading,
       isError,
       paneRef1,
       paneRef2,
+      headerRef,
     }),
     [
-      table,
       columnOrder,
       setColumnOrder,
       isLoading,
       isError,
       paneRef1,
       paneRef2,
+      headerRef,
     ],
   );
 
   return (
-    <DataGridContextt.Provider value={contextValue}>
+    <DataGridContextt.Provider
+      value={{
+        ...contextValue,
+        table,
+      }}
+    >
       {children}
     </DataGridContextt.Provider>
   );

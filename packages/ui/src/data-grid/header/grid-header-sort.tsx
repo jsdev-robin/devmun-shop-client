@@ -6,10 +6,12 @@ import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { cn } from '../../lib/utils';
 
 const GridHeaderSort = <T,>({ header }: { header: Header<T, unknown> }) => {
+  const isSelect = ['select'].includes(header.column.id);
   return (
     <div
       className={cn(
         'flex items-center',
+        !isSelect && 'truncate',
         header.column.getCanSort() ? 'cursor-pointer select-none' : '',
       )}
       onClick={header.column.getToggleSortingHandler()}
@@ -23,9 +25,9 @@ const GridHeaderSort = <T,>({ header }: { header: Header<T, unknown> }) => {
           : undefined
       }
     >
-      <span className="truncate capitalize">
+      <div className={cn(!isSelect && 'truncate capitalize')}>
         {flexRender(header.column.columnDef.header, header.getContext())}
-      </span>
+      </div>
       {{
         asc: <ChevronUpIcon />,
         desc: <ChevronDownIcon />,

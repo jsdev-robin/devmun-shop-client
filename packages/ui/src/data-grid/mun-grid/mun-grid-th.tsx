@@ -8,10 +8,11 @@ import GridHeaderFilter from '../header/grid-header-filter';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '../../lib/utils';
-import { getPinStyles } from '../utils/getPinStyles';
+import GridHeaderDnd from '../header/grid-header-dnd';
+import GridHeaderResize from '../header/grid-header-resize';
 
 const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
-  const { isDragging, setNodeRef, transform } = useSortable({
+  const { listeners, isDragging, setNodeRef, transform } = useSortable({
     id: header.column.id,
   });
   const style: CSSProperties = {
@@ -22,8 +23,11 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
     zIndex: isDragging ? 10 : 0,
     width: header.column.getSize(),
     minWidth: header.column.getSize(),
-    maxWidth: header.column.getSize(),
-    ...getPinStyles(header.column),
+    maxWidth: ['select'].includes(header.column.id)
+      ? header.column.getSize()
+      : undefined,
+    flex: ['select'].includes(header.column.id) ? undefined : 1,
+    // ...getPinStyles(header.column),
   };
 
   return (
@@ -37,12 +41,16 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
     >
       {header.isPlaceholder ? null : (
         <>
-          <div className="space-y-2 w-full">
+          <div className="space-y-1.5 w-full">
             <div className="p-1.5 flex items-center justify-between gap-3">
               <GridHeaderSort header={header} />
+              <div className="flex items-center gap-1.5">
+                <GridHeaderDnd listeners={listeners} header={header} />
+              </div>
             </div>
             <GridHeaderFilter column={header.column} />
           </div>
+          <GridHeaderResize header={header} />
         </>
       )}
     </Th>

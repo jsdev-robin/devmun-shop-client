@@ -12,6 +12,8 @@ import MunGridTd from './mun-grid-td';
 const MunGridBody = () => {
   const { table, columnOrder } = useDataGrid();
 
+  const split = false;
+
   return (
     <FlexTable>
       <Tbody>
@@ -21,8 +23,7 @@ const MunGridBody = () => {
             data-state={row.getIsSelected() && 'selected'}
             className="*:border-r *:border-border h-10 data-[state=selected]:bg-blue-800/25"
           >
-            {row
-              .getVisibleCells()
+            {(split ? row.getCenterVisibleCells() : row.getVisibleCells())
               // .filter((cell) => !['rowNumber'].includes(cell.column.id))
               .map((cell) => (
                 <SortableContext
