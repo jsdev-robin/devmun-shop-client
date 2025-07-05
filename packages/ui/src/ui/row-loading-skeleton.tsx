@@ -18,7 +18,7 @@ const RowLoadingSkeleton = ({
     <>
       {['select'].includes(column.id) ? (
         <Loader size={16} className="animate-spin" />
-      ) : ['rowNumber'].includes(column.id) ? (
+      ) : ['actions', 'pin', 'drag-handle', 'rowNumber'].includes(column.id) ? (
         <Skeleton className="w-full h-4" />
       ) : (
         <Skeleton

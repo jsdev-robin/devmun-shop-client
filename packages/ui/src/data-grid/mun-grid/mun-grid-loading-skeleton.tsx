@@ -4,7 +4,7 @@ import { useDataGrid } from '../contexts/data-grid-contexts';
 import { Tbody, Td, Tr } from '../../components/flex-table';
 import { getPinStyles } from '../utils/getPinStyles';
 
-const MunGridLoadingSkeleton = () => {
+const GridLoadingSkeleton = () => {
   const { table, split } = useDataGrid();
 
   const visibleColumns = useMemo(
@@ -33,10 +33,16 @@ const MunGridLoadingSkeleton = () => {
               style={{
                 width: column.getSize(),
                 minWidth: column.getSize(),
-                maxWidth: ['select'].includes(column.id)
+                maxWidth: ['select', 'actions', 'pin', 'drag-handle'].includes(
+                  column.id,
+                )
                   ? column.getSize()
                   : undefined,
-                flex: ['select'].includes(column.id) ? undefined : 1,
+                flex: ['select', 'actions', 'pin', 'drag-handle'].includes(
+                  column.id,
+                )
+                  ? undefined
+                  : 1,
                 ...(!split && getPinStyles(column)),
               }}
             >
@@ -49,4 +55,4 @@ const MunGridLoadingSkeleton = () => {
   );
 };
 
-export default MunGridLoadingSkeleton;
+export default GridLoadingSkeleton;

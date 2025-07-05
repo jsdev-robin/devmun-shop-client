@@ -27,10 +27,14 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
     zIndex: isDragging ? 10 : 0,
     width: header.column.getSize(),
     minWidth: header.column.getSize(),
-    maxWidth: ['select'].includes(header.column.id)
+    maxWidth: ['select', 'actions', 'pin', 'drag-handle'].includes(
+      header.column.id,
+    )
       ? header.column.getSize()
       : undefined,
-    flex: ['select'].includes(header.column.id) ? undefined : 1,
+    flex: ['select', 'actions', 'pin', 'drag-handle'].includes(header.column.id)
+      ? undefined
+      : 1,
     ...(!split && getPinStyles(header.column)),
   };
 

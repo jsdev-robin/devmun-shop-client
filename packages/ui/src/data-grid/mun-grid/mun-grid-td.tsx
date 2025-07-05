@@ -7,6 +7,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Td } from '../../components/flex-table';
 import { cn } from '../../lib/utils';
 import { getPinStyles } from '../utils/getPinStyles';
+import { useDataGrid } from '../contexts/data-grid-contexts';
 
 const MunGridTd = <T,>({
   cell,
@@ -18,6 +19,7 @@ const MunGridTd = <T,>({
   const { isDragging, setNodeRef, transform } = useSortable({
     id: cell.column.id,
   });
+  const { split } = useDataGrid();
   const style: CSSProperties = {
     opacity: isDragging ? 0.8 : 1,
     position: 'relative',
@@ -26,7 +28,15 @@ const MunGridTd = <T,>({
     zIndex: isDragging ? 1 : 0,
     width: cell.column.getSize(),
     minWidth: cell.column.getSize(),
-    ...getPinStyles(cell.column),
+    maxWidth: ['select', 'actions', 'pin', 'drag-handle'].includes(
+      cell.column.id,
+    )
+      ? cell.column.getSize()
+      : undefined,
+    flex: ['select', 'actions', 'pin', 'drag-handle'].includes(cell.column.id)
+      ? undefined
+      : 1,
+    ...(!split && getPinStyles(cell.column)),
   };
 
   return (
