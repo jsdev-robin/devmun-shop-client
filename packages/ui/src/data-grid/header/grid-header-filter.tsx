@@ -80,9 +80,9 @@ const GridHeaderFilter = <T,>({ column }: { column: Column<T, unknown> }) => {
   }, [columnFilterValue, filterVariant]);
 
   return column.getCanFilter() ? (
-    <div className="p-1.5 border-t border-border w-full">
+    <div className="p-2 border-t border-border w-full">
       {filterVariant === 'range' ? (
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           <DebouncedInput
             type="number"
             value={(columnFilterValue as [number, number])?.[0] ?? ''}

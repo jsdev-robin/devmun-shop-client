@@ -43,10 +43,10 @@ const MunGridTh = <T,>({ header }: { header: Header<T, unknown> }) => {
     >
       {header.isPlaceholder ? null : (
         <>
-          <div className="space-y-1.5 w-full">
-            <div className="p-1.5 flex items-center justify-between gap-3">
+          <div className="space-y-2 w-full">
+            <div className="p-2 flex items-center justify-between gap-3">
               <GridHeaderSort header={header} />
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <GridHeaderDnd listeners={listeners} header={header} />
                 <GridHeaderMenu header={header} />
               </div>
