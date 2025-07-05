@@ -40,7 +40,7 @@ const MunGrid = <T,>({
             <div className="overflow-hidden flex-1">
               <MunGridMain />
             </div>
-            <Toolbar />
+            {sm && <Toolbar />}
           </div>
         </div>
       </ColumnDnd>
