@@ -30,6 +30,7 @@ const ProductList = () => {
         id: 'drag-handle',
         cell: ({ row }) => <RowDragHandle rowId={row.id} />,
         size: 36,
+        maxSize: 36,
       },
       {
         id: 'pin',

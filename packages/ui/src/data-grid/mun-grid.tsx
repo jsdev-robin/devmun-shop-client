@@ -7,6 +7,7 @@ import MunGridMain from './mun-grid/mun-grid-main';
 import MunGridRowNumber from './mun-grid/mun-grid-row-number';
 import { useBreakpoint } from '../hooks/use-breakpoint';
 import { breakpoints } from '../utils/breakpoints';
+import Toolbar from './toolbar';
 
 interface MunGridProps<T> {
   data?: T[];
@@ -37,6 +38,7 @@ const MunGrid = <T,>({
             <div className="overflow-hidden flex-1">
               <MunGridMain />
             </div>
+            <Toolbar />
           </div>
         </div>
       </ColumnDnd>
