@@ -9,12 +9,12 @@ import {
   CardTitle,
 } from '@repo/ui/components/card';
 import MunGrid from '@repo/ui/data-grid/mun-grid';
-import { useGetProductQuery } from '../../../lib/features/products/productEndpoint';
-import { Product } from '../../../types/product';
 import IndeterminateCheckbox from '@repo/ui/components/IndeterminateCheckbox';
+import { Person } from '../../../types/person';
+import { useGetPersonsQuery } from '../../../lib/features/person/personEndpoints';
 
 const ProductList = () => {
-  const columns = useMemo<ColumnDef<Product, unknown>[]>(
+  const columns = useMemo<ColumnDef<Person, unknown>[]>(
     () => [
       {
         accessorFn: (_row, index) => index + 1,
@@ -23,15 +23,17 @@ const ProductList = () => {
         header: '',
         size: 54,
         maxSize: 54,
-        // enableColumnFilter: false,
+        enableColumnFilter: false,
       },
       {
         id: 'drag-handle',
+        // cell: ({ row }) => <RowDragHandle rowId={row.id} />,
         size: 36,
       },
       {
         id: 'pin',
         header: () => 'Pin',
+        // cell: ({ row }) => <RowPin row={row} />,
         size: 60,
         maxSize: 60,
       },
@@ -58,122 +60,122 @@ const ProductList = () => {
             />
           </div>
         ),
-        size: 36,
-        maxSize: 36,
+        size: 40,
+        maxSize: 40,
+        enableColumnFilter: false,
       },
       {
-        accessorKey: 'item',
-        id: 'item',
-        cell: (info) => info.getValue(),
-        header: 'Item',
-        meta: {
-          filterVariant: 'text',
-        },
+        id: 'hello',
+        header: () => <span>Hello</span>,
+        columns: [
+          {
+            id: 'firstName',
+            accessorKey: 'firstName',
+            cell: (info) => info.getValue(),
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'text' },
+            enableHiding: false,
+          },
+          {
+            id: 'lastName',
+            accessorFn: (row) => row.lastName,
+            cell: (info) => info.getValue(),
+            header: () => <span>Last Name</span>,
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'text' },
+          },
+          {
+            id: 'createdAt',
+            accessorFn: (row) => row.createdAt,
+            cell: (info) => info.getValue(),
+            header: () => <span>createdAt</span>,
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'dateRange' },
+          },
+          {
+            id: 'email',
+            accessorFn: (row) => row.email,
+            cell: (info) => info.getValue(),
+            header: () => <span>email</span>,
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'text' },
+          },
+          {
+            id: 'phone',
+            accessorFn: (row) => row.phone,
+            cell: (info) => info.getValue(),
+            header: () => <span>phone</span>,
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'text' },
+          },
+          {
+            id: 'address',
+            accessorFn: (row) => row.address,
+            cell: (info) => info.getValue(),
+            header: () => <span>address</span>,
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'text' },
+          },
+        ],
       },
       {
-        accessorKey: 'category',
-        id: 'category',
-        cell: (info) => info.getValue(),
-        header: 'Category',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'stocks',
-        id: 'stocks',
-        cell: (info) => info.getValue(),
-        header: 'Stocks',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'sku',
-        id: 'sku',
-        cell: (info) => info.getValue(),
-        header: 'Sku',
-        meta: {
-          filterVariant: 'number',
-        },
-      },
-      {
-        accessorKey: 'barcode',
-        id: 'barcode',
-        cell: (info) => info.getValue(),
-        header: 'Barcode',
-        meta: {
-          filterVariant: 'number',
-        },
-      },
-      {
-        accessorKey: 'price',
-        id: 'price',
-        cell: (info) => info.getValue(),
-        header: 'Price',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'salesPerDay',
-        id: 'salesPerDay',
-        cell: (info) => info.getValue(),
-        header: 'Daily Sales',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'salesPerMonth',
-        id: 'salesPerMonth',
-        cell: (info) => info.getValue(),
-        header: 'Monthly Sales',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'rating',
-        id: 'rating',
-        cell: (info) => info.getValue(),
-        header: 'Rating',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'totalSales',
-        id: 'totalSales',
-        cell: (info) => info.getValue(),
-        header: 'Total Sales',
-        meta: {
-          filterVariant: 'number',
-        },
-      },
-      {
-        accessorKey: 'revenue',
-        id: 'revenue',
-        cell: (info) => info.getValue(),
-        header: 'Revenue',
-        meta: {
-          filterVariant: 'text',
-        },
-      },
-      {
-        accessorKey: 'lastUpdate',
-        id: 'lastUpdate',
-        cell: (info) => info.getValue(),
-        header: 'Last Update',
-        meta: {
-          filterVariant: 'text',
-        },
+        header: 'Info',
+        footer: (props) => props.column.id,
+        columns: [
+          {
+            id: 'age',
+            accessorKey: 'age',
+            header: () => 'Age',
+            footer: (props) => props.column.id,
+            meta: { filterVariant: 'range' },
+          },
+          {
+            header: 'More Info',
+            columns: [
+              {
+                id: 'visits',
+                accessorKey: 'visits',
+                header: () => <span>Visits</span>,
+                footer: (props) => props.column.id,
+                meta: { filterVariant: 'text' },
+              },
+              {
+                id: 'status',
+                accessorKey: 'status',
+                header: 'Status',
+                footer: (props) => props.column.id,
+                meta: { filterVariant: 'select' },
+              },
+              {
+                id: 'progress',
+                accessorKey: 'progress',
+                header: 'Profile Progress',
+                footer: (props) => props.column.id,
+                meta: { filterVariant: 'text' },
+              },
+              {
+                id: 'rank',
+                accessorKey: 'rank',
+                header: 'Profile rank',
+                footer: (props) => props.column.id,
+                meta: { filterVariant: 'text' },
+              },
+              {
+                id: 'isVerified',
+                accessorKey: 'isVerified',
+                header: 'Profile isVerified',
+                footer: (props) => props.column.id,
+                meta: { filterVariant: 'text' },
+              },
+            ],
+          },
+        ],
       },
     ],
     [],
   );
 
-  const { data, isError, isLoading, isFetching } = useGetProductQuery({});
+  const { data, isError, isLoading, isFetching } = useGetPersonsQuery({});
 
   return (
     <section>

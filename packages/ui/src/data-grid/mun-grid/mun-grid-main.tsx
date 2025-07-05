@@ -1,29 +1,29 @@
 'use client';
 
 import React from 'react';
-import MainGridHead from './MainGridHead';
-import MainGridBody from './MainGridBody';
-import { useDataLayoutContext } from '../../context/data-layout-context';
-import ColumnDnd from '../../context/column-dnd';
+import MunGridHead from './mun-grid-head';
+import MunGridBody from './mun-grid-body';
+import { useDataGrid } from '../contexts/data-grid-contexts';
 
-const MainGrid = () => {
-  const { paneRef1, paneRef2 } = useDataLayoutContext();
+const MunGridMain = () => {
+  const { paneRef1, paneRef2 } = useDataGrid();
+
   return (
-    <ColumnDnd>
+    <React.Fragment>
       <div
         className="w-full bg-muted border-b border-border overflow-y-scroll firefox:overflow-x-hidden not-firefox:[&::-webkit-scrollbar]:h-0 firefox:[scrollbar-color:transparent_transparent]"
         ref={paneRef1}
       >
-        <MainGridHead />
+        <MunGridHead />
       </div>
       <div
         className="h-[75svh] lg:h-[75vh] overflow-scroll bg-background"
         ref={paneRef2}
       >
-        <MainGridBody />
+        <MunGridBody />
       </div>
-    </ColumnDnd>
+    </React.Fragment>
   );
 };
 
-export default MainGrid;
+export default MunGridMain;

@@ -2,10 +2,10 @@
 
 import React, { CSSProperties } from 'react';
 import { Cell, flexRender } from '@tanstack/react-table';
-import { Td } from '../../../components/flex-table';
-import { cn } from '../../../lib/utils';
+import { Td } from '../../components/flex-table';
+import { cn } from '../../lib/utils';
 
-const GridTd = <T,>({
+const MunGridTd = <T,>({
   cell,
   className,
 }: {
@@ -28,4 +28,4 @@ const GridTd = <T,>({
   );
 };
 
-export default GridTd;
+export default MunGridTd;

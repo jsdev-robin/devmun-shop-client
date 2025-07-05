@@ -1,7 +1,7 @@
-import { Person } from '@/lib/types';
 import { PaginationState } from '@tanstack/react-table';
 import { Discount, DiscountTrend } from './discount';
 import { Order } from './order';
+import { Person } from './person';
 import { Review } from './review';
 
 export type GetQueryParams = {

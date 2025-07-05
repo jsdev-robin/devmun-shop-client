@@ -5,7 +5,7 @@ import { flexRender, Header } from '@tanstack/react-table';
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { cn } from '../../lib/utils';
 
-const ColumnSort = <T,>({ header }: { header: Header<T, unknown> }) => {
+const GridHeaderSort = <T,>({ header }: { header: Header<T, unknown> }) => {
   return (
     <div
       className={cn(
@@ -34,4 +34,4 @@ const ColumnSort = <T,>({ header }: { header: Header<T, unknown> }) => {
   );
 };
 
-export default ColumnSort;
+export default GridHeaderSort;

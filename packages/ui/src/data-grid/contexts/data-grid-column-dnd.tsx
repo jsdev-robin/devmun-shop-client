@@ -13,14 +13,14 @@ import {
 } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
-import { useDataLayoutContext } from './data-layout-context';
+import { useDataGrid } from './data-grid-contexts';
 
 interface ColumnDndProps {
   children: React.ReactNode;
 }
 
 const ColumnDnd: React.FC<ColumnDndProps> = ({ children }) => {
-  const { setColumnOrder } = useDataLayoutContext();
+  const { setColumnOrder } = useDataGrid();
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
