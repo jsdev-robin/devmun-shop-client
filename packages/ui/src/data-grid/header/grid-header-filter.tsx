@@ -22,6 +22,27 @@ import {
 import { Button } from '../../components/button';
 import { cn } from '../../lib/utils';
 import DebouncedInput from '../../components/debounced-input';
+import { RowData } from '@tanstack/react-table';
+
+declare module '@tanstack/react-table' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    filterVariant?:
+      | 'text'
+      | 'number'
+      | 'tel'
+      | 'url'
+      | 'color'
+      | 'range'
+      | 'select'
+      | 'dateRange'
+      | 'date'
+      | 'datetime-local'
+      | 'month'
+      | 'time'
+      | 'week';
+  }
+}
 
 const GridHeaderFilter = <T,>({ column }: { column: Column<T, unknown> }) => {
   const columnFilterValue = column.getFilterValue();
