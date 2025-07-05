@@ -241,7 +241,21 @@ const Toolbar = () => {
           </div>
         </div>
       )}
-
+      {activePanel === 'toolbar' && (
+        <div className={cn('w-60 border-l border-border transition-all p-3')}>
+          <p>
+            🚧 This section is currently under development. For updates or
+            inquiries, feel free to reach out to the developer at{' '}
+            <a
+              href="mailto:jsdev.robin@gmail.com"
+              className="text-blue-600 underline"
+            >
+              jsdev.robin@gmail.com
+            </a>{' '}
+            📧.
+          </p>
+        </div>
+      )}
       {activePanel === 'filter' && (
         <div className={cn('w-60 border-l border-border transition-all')}>
           <div className="space-y-3">
