@@ -64,6 +64,12 @@ export default {
         '.scroll-thin': {
           scrollbarWidth: 'thin',
         },
+        '.writing-mode-vertical-lr': {
+          writingMode: 'vertical-lr',
+        },
+        '.writing-mode-vertical-rl': {
+          writingMode: 'vertical-rl',
+        },
       });
     }),
   ],

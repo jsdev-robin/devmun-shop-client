@@ -13,6 +13,7 @@ import {
 import { DataLayoutProvider } from './context/data-layout-context';
 import MainGrid from './mun-grid/particles/MainGrid';
 import ColumnDnd from './context/column-dnd';
+import Toolbar from './toolbar/Index';
 
 interface MunGridProps<T> {
   data?: T[];
@@ -22,7 +23,12 @@ interface MunGridProps<T> {
   isFetching: boolean;
 }
 
-const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
+const MunGrid = <T,>({
+  data = [],
+  columns,
+  isError,
+  isLoading,
+}: MunGridProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     columns.map((c) => c.id!),
   );
@@ -56,6 +62,8 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
       table={table}
       columnOrder={columnOrder}
       setColumnOrder={setColumnOrder}
+      isError={isError}
+      isLoading={isLoading}
     >
       <ColumnDnd>
         <div>
@@ -64,6 +72,7 @@ const MunGrid = <T,>({ data = [], columns }: MunGridProps<T>) => {
               <div className="overflow-hidden flex-1">
                 <MainGrid />
               </div>
+              <Toolbar />
             </div>
           </div>
         </div>
