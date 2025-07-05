@@ -1,7 +1,18 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Columns, Filter, Settings } from 'lucide-react';
+import {
+  CheckCircle,
+  Columns,
+  EyeOff,
+  Filter,
+  ListRestart,
+  MoveRight,
+  PinOff,
+  Settings,
+  Shuffle,
+  StretchHorizontal,
+} from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from '../../components/button';
 import { Checkbox } from '../../components/checkbox';
@@ -10,6 +21,11 @@ import { Input } from '../../components/input';
 import { Label } from '../../components/label';
 import { Separator } from '../../components/separator';
 import { useDataGrid } from '../contexts/data-grid-contexts';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '../../components/tooltip';
 
 const Toolbar = () => {
   const [activePanel, setActivePanel] = useState<string | null>(null);
@@ -117,6 +133,107 @@ const Toolbar = () => {
                   <span className="truncate">Show DND Column</span>
                 </Label>
               </div>
+            </div>
+            <Separator />
+            <div className="p-3 flex justify-between flex-wrap gap-3">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetColumnPinning(true)}
+                  >
+                    <MoveRight />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Unpin all columns</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetColumnOrder(true)}
+                  >
+                    <ListRestart />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset column order</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetColumnSizing(true)}
+                  >
+                    <StretchHorizontal />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset column sizes</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetColumnVisibility(true)}
+                  >
+                    <EyeOff />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset Column Visibility</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetSorting(true)}
+                  >
+                    <Shuffle />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset Column Sort</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetRowPinning(true)}
+                  >
+                    <PinOff />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset Row Pinned</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => table.resetRowSelection(true)}
+                  >
+                    <CheckCircle />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset Row Selection</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </div>
