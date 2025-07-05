@@ -43,6 +43,8 @@ interface DataGridContexttValue<T> {
   cellRef: (node: HTMLElement | null) => void;
   split: boolean;
   setSplit: React.Dispatch<React.SetStateAction<boolean>>;
+  globalFilter?: string;
+  setGlobalFilter?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
@@ -167,6 +169,8 @@ export const DataGridProvider = <T,>({
       headerRef,
       split,
       setSplit,
+      globalFilter,
+      setGlobalFilter,
     }),
     [
       columnOrder,
@@ -184,6 +188,8 @@ export const DataGridProvider = <T,>({
       headerRef,
       split,
       setSplit,
+      globalFilter,
+      setGlobalFilter,
     ],
   );
 

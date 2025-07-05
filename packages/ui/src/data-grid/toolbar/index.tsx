@@ -26,6 +26,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '../../components/tooltip';
+import DebouncedInput from '../../components/debounced-input';
+import ToolbarFilter from './toolbar-filter';
 
 const Toolbar = () => {
   const [activePanel, setActivePanel] = useState<string | null>(null);
@@ -33,7 +35,8 @@ const Toolbar = () => {
   const togglePanel = (panel: string | null) => {
     setActivePanel(activePanel === panel ? null : panel);
   };
-  const { table, split, setSplit } = useDataGrid();
+  const { table, split, setSplit, globalFilter, setGlobalFilter } =
+    useDataGrid();
 
   const visibleColumns = useMemo(() => {
     return table
@@ -234,6 +237,47 @@ const Toolbar = () => {
                   <p>Reset Row Selection</p>
                 </TooltipContent>
               </Tooltip>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activePanel === 'filter' && (
+        <div className={cn('w-60 border-l border-border transition-all')}>
+          <div className="space-y-3">
+            <div className="p-3">
+              <DebouncedInput
+                value={globalFilter ?? ''}
+                onChange={(value) => {
+                  if (setGlobalFilter) {
+                    setGlobalFilter(String(value));
+                  }
+                }}
+                placeholder="Search all columns..."
+              />
+            </div>
+            <div className="overflow-y-auto h-[65vh] px-3 space-y-3">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <React.Fragment key={headerGroup.id}>
+                  {headerGroup.headers
+                    .filter(
+                      (header) => !['rowNumber'].includes(header.column.id),
+                    )
+                    .map((header) => (
+                      <ToolbarFilter key={header.id} column={header.column} />
+                    ))}
+                </React.Fragment>
+              ))}
+            </div>
+            <Separator />
+            <div className="px-3">
+              <Button
+                onClick={() => table.setColumnFilters([])}
+                variant="outline"
+              >
+                <ListRestart />
+                Reset Filters
+              </Button>
             </div>
           </div>
         </div>
