@@ -67,6 +67,7 @@ const ProductList = () => {
         size: 40,
         maxSize: 40,
         enableColumnFilter: false,
+        enableHiding: false,
       },
       {
         id: 'firstName',
