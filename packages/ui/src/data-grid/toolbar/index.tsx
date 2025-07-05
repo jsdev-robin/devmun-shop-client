@@ -22,6 +22,9 @@ const Toolbar = () => {
   const visibleColumns = useMemo(() => {
     return table
       .getAllLeafColumns()
+      .filter(
+        (column) => !['rowNumber', 'pin', 'drag-handle'].includes(column.id),
+      )
       .filter((column) =>
         column.id.toLowerCase().includes(searchTerm.toLowerCase()),
       );
