@@ -202,6 +202,14 @@ const ProductList = () => {
               isError={isError}
               isLoading={isLoading || isFetching}
               setParams={setParams}
+              toolbar={{
+                active: true,
+                open: 'columns',
+              }}
+              isSplit={true}
+              pin={{
+                left: ['actions'],
+              }}
             />
           </CardContent>
         </Card>

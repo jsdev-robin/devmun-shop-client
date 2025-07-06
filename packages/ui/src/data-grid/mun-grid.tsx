@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import Pagination from './pagination';
 import { PaginationState } from '@tanstack/react-table';
+import { ColumnPinningState } from '@tanstack/react-table';
 const MunGridSplitLeft = dynamic(
   () => import('./mun-grid/mun-grid-split-left'),
   {
@@ -41,6 +42,12 @@ interface MunGridProps<T> {
     queryParams: string;
     pagination: PaginationState;
   }) => void;
+  toolbar?: {
+    active?: boolean;
+    open?: 'columns' | 'toolbar' | 'filter' | null;
+  };
+  isSplit?: boolean;
+  pin?: ColumnPinningState;
 }
 
 const MunGrid = <T,>({
@@ -50,6 +57,12 @@ const MunGrid = <T,>({
   isLoading,
   pagination = [20, 30, 40, 50, 60, 70, 80, 90, 100],
   setParams,
+  toolbar = {
+    active: true,
+    open: null,
+  },
+  isSplit,
+  pin,
 }: MunGridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
@@ -59,6 +72,8 @@ const MunGrid = <T,>({
       isLoading={isLoading}
       isError={isError}
       setParams={setParams}
+      isSplit={isSplit}
+      pin={pin}
     >
       <ColumnDnd>
         <div className="space-y-3 relative">
@@ -73,7 +88,7 @@ const MunGrid = <T,>({
             <Suspense>
               <MunGridSplitRight />
             </Suspense>
-            {sm && <Toolbar />}
+            {toolbar.active && sm && <Toolbar open={toolbar.open} />}
           </div>
           <Pagination pagination={pagination} />
         </div>

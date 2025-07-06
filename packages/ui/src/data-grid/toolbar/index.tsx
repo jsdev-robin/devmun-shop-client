@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   CheckCircle,
   Columns,
@@ -29,7 +29,11 @@ import {
 import DebouncedInput from '../../components/debounced-input';
 import ToolbarFilter from './toolbar-filter';
 
-const Toolbar = () => {
+interface ToolbarProps {
+  open?: 'columns' | 'toolbar' | 'filter' | null;
+}
+
+const Toolbar: React.FC<ToolbarProps> = ({ open }) => {
   const [activePanel, setActivePanel] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const togglePanel = (panel: string | null) => {
@@ -37,6 +41,12 @@ const Toolbar = () => {
   };
   const { table, split, setSplit, globalFilter, setGlobalFilter } =
     useDataGrid();
+
+  useEffect(() => {
+    if (open) {
+      setActivePanel(open);
+    }
+  }, [open]);
 
   const visibleColumns = useMemo(() => {
     return table

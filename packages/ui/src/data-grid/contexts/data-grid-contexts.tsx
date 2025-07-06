@@ -12,6 +12,7 @@ import React, {
 import {
   ColumnDef,
   ColumnFiltersState,
+  ColumnPinningState,
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
@@ -69,6 +70,7 @@ interface DataGridProviderProps<T> {
     queryParams: string;
     pagination: PaginationState;
   }) => void;
+  pin?: ColumnPinningState;
 }
 
 export const DataGridProvider = <T,>({
@@ -79,6 +81,7 @@ export const DataGridProvider = <T,>({
   isError,
   isSplit = false,
   setParams,
+  pin = {},
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -94,6 +97,8 @@ export const DataGridProvider = <T,>({
     pin: false,
     'drag-handle': false,
   });
+
+  const [columnPinning, setColumnPinning] = useState<ColumnPinningState>(pin);
 
   const queryParams = buildQueryParams(columnFilters);
 
@@ -118,6 +123,7 @@ export const DataGridProvider = <T,>({
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: setPagination,
     onRowSelectionChange: setRowSelection,
+    onColumnPinningChange: setColumnPinning,
     columnResizeMode: 'onChange',
     enableRowSelection: true,
     manualPagination: true,
@@ -129,6 +135,7 @@ export const DataGridProvider = <T,>({
       rowSelection,
       pagination,
       columnVisibility,
+      columnPinning,
     },
     defaultColumn: {
       minSize: 180,
