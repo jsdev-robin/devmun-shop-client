@@ -11,6 +11,7 @@ import MunGridTd from './mun-grid-td';
 import MunGridError from './mun-grid-error';
 import MunGridLoadingSkeleton from './mun-grid-loading-skeleton';
 import MunGridNoData from './mun-grid-no-data';
+import MunGridRowPinned from './mun-grid-row-pin';
 
 const MunGridBody = () => {
   const { table, columnOrder, cellRef, split, isError, isLoading } =
@@ -26,6 +27,10 @@ const MunGridBody = () => {
         <MunGridNoData />
       ) : (
         <Tbody>
+          {table.getTopRows().map((row) => (
+            <MunGridRowPinned key={row.id} row={row} table={table} />
+          ))}
+
           {table.getRowModel().rows.map((row) => (
             <Tr
               ref={cellRef}
@@ -45,6 +50,9 @@ const MunGridBody = () => {
                   </SortableContext>
                 ))}
             </Tr>
+          ))}
+          {table.getBottomRows().map((row) => (
+            <MunGridRowPinned key={row.id} row={row} table={table} />
           ))}
         </Tbody>
       )}
