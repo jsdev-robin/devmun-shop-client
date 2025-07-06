@@ -1,7 +1,70 @@
-import React from 'react';
+'use client';
 
-const MunTable = () => {
-  return <div>MunTable</div>;
+import { DataGridProvider } from './contexts/data-grid-contexts';
+import ColumnDnd from './contexts/data-grid-column-dnd';
+import { useBreakpoint } from '../hooks/use-breakpoint';
+import { breakpoints } from '../utils/breakpoints';
+import Toolbar from './toolbar';
+import { Suspense } from 'react';
+import Pagination from './pagination';
+import { GridProps } from '../types/grid-types';
+import MunTableMain from './mun-table/mun-table-main';
+import dynamic from 'next/dynamic';
+const MunTableSplitLeft = dynamic(
+  () => import('./mun-table/mun-table-split-left'),
+  {
+    ssr: false,
+  },
+);
+const MunTableSplitRight = dynamic(
+  () => import('./mun-table/mun-table-split-right'),
+  { ssr: false },
+);
+
+const MunTable = <T,>({
+  data,
+  columns,
+  isError,
+  isLoading,
+  pagination = [20, 30, 40, 50, 60, 70, 80, 90, 100],
+  setParams,
+  toolbar = {
+    active: true,
+    open: null,
+  },
+  isSplit,
+  pin,
+}: GridProps<T>) => {
+  const sm = !useBreakpoint(breakpoints.sm);
+  return (
+    <DataGridProvider
+      data={data}
+      columns={columns}
+      isLoading={isLoading}
+      isError={isError}
+      setParams={setParams}
+      isSplit={isSplit}
+      pin={pin}
+    >
+      <ColumnDnd>
+        <div className="space-y-3 relative">
+          <div className="flex bg-muted rounded-md overflow-hidden border border-border">
+            <Suspense>
+              <MunTableSplitLeft />
+            </Suspense>
+            <div className="overflow-hidden flex-1">
+              <MunTableMain />
+            </div>
+            <Suspense>
+              <MunTableSplitRight />
+            </Suspense>
+            {toolbar.active && sm && <Toolbar open={toolbar.open} />}
+          </div>
+          <Pagination pagination={pagination} />
+        </div>
+      </ColumnDnd>
+    </DataGridProvider>
+  );
 };
 
 export default MunTable;

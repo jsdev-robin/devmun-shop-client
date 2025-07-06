@@ -1,6 +1,5 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
 import { DataGridProvider } from './contexts/data-grid-contexts';
 import ColumnDnd from './contexts/data-grid-column-dnd';
 import MunGridMain from './mun-grid/mun-grid-main';
@@ -11,8 +10,8 @@ import Toolbar from './toolbar';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import Pagination from './pagination';
-import { PaginationState } from '@tanstack/react-table';
-import { ColumnPinningState } from '@tanstack/react-table';
+import { GridProps } from '../types/grid-types';
+
 const MunGridSplitLeft = dynamic(
   () => import('./mun-grid/mun-grid-split-left'),
   {
@@ -23,32 +22,6 @@ const MunGridSplitRight = dynamic(
   () => import('./mun-grid/mun-grid-split-right'),
   { ssr: false },
 );
-
-interface MunGridProps<T> {
-  data?: {
-    data: T[];
-    total: number;
-    page: number;
-    pageSize: number;
-  };
-  columns: ColumnDef<T>[];
-  isError: boolean;
-  isLoading: boolean;
-  pagination?: number[];
-  setParams?: ({
-    queryParams,
-    pagination,
-  }: {
-    queryParams: string;
-    pagination: PaginationState;
-  }) => void;
-  toolbar?: {
-    active?: boolean;
-    open?: 'columns' | 'toolbar' | 'filter' | null;
-  };
-  isSplit?: boolean;
-  pin?: ColumnPinningState;
-}
 
 const MunGrid = <T,>({
   data,
@@ -63,7 +36,7 @@ const MunGrid = <T,>({
   },
   isSplit,
   pin,
-}: MunGridProps<T>) => {
+}: GridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
     <DataGridProvider
