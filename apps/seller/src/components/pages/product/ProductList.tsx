@@ -27,6 +27,7 @@ const ProductList = () => {
         header: '',
         size: 54,
         maxSize: 54,
+        enableHiding: false,
       },
       {
         id: 'actions',
