@@ -24,6 +24,7 @@ import {
 import useSyncScroll from '../hooks/useSyncScroll';
 import { useElementDimensions } from '../hooks/useElementDimensions';
 import { getAllLeafColumnIds } from '../../lib/getAllLeafColumnIds';
+import { buildQueryParams } from '../../utils/buildQueryParams';
 
 interface DataGridContexttValue<T> {
   table: Table<T>;
@@ -61,8 +62,13 @@ interface DataGridProviderProps<T> {
   isLoading?: boolean;
   isError?: boolean;
   isSplit?: boolean;
-  getQuery?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
-  getPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
+  setParams?: ({
+    queryParams,
+    pagination,
+  }: {
+    queryParams: string;
+    pagination: PaginationState;
+  }) => void;
 }
 
 export const DataGridProvider = <T,>({
@@ -72,8 +78,7 @@ export const DataGridProvider = <T,>({
   isLoading,
   isError,
   isSplit = false,
-  getQuery,
-  getPagination,
+  setParams,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -90,17 +95,16 @@ export const DataGridProvider = <T,>({
     'drag-handle': false,
   });
 
-  useEffect(() => {
-    if (getQuery) {
-      getQuery(columnFilters);
-    }
-  }, [columnFilters, getQuery]);
+  const queryParams = buildQueryParams(columnFilters);
 
   useEffect(() => {
-    if (getPagination) {
-      getPagination(pagination);
+    if (setParams) {
+      setParams({
+        queryParams: queryParams ?? '',
+        pagination: pagination,
+      });
     }
-  }, [pagination, getPagination]);
+  }, [pagination, queryParams, setParams]);
 
   const table = useReactTable({
     data: data?.data ?? [],

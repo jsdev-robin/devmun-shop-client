@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { ColumnDef, PaginationState } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import {
   Card,
   CardContent,
@@ -14,10 +14,9 @@ import { useGetPersonsQuery } from '../../../lib/features/person/personEndpoints
 import IndeterminateCheckbox from '@repo/ui/components/IndeterminateCheckbox';
 import RowDragHandle from '@repo/ui/components/row-drag-handle';
 import RowPin from '@repo/ui/components/row-pin';
-import { buildQueryParams } from '@repo/ui/utils/buildQueryParams';
-import { ColumnFiltersState } from '@tanstack/react-table';
 import { Fab } from '@repo/ui/components/fab';
 import { Edit, Eye, Trash } from 'lucide-react';
+import { GetQueryParams } from '../../../types/api';
 
 const ProductList = () => {
   const columns = useMemo<ColumnDef<Person, unknown>[]>(
@@ -186,18 +185,8 @@ const ProductList = () => {
     ],
     [],
   );
-  const [query, setQuery] = useState<ColumnFiltersState>([]);
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 20,
-  });
-
-  const queryParams = buildQueryParams(query);
-
-  const { data, isError, isLoading, isFetching } = useGetPersonsQuery({
-    queryParams,
-    pagination,
-  });
+  const [params, setParams] = useState<GetQueryParams>({});
+  const { data, isError, isLoading, isFetching } = useGetPersonsQuery(params);
 
   return (
     <section>
@@ -212,12 +201,7 @@ const ProductList = () => {
               columns={columns}
               isError={isError}
               isLoading={isLoading || isFetching}
-              getQuery={(value) => {
-                setQuery(value);
-              }}
-              getPagination={(value) => {
-                setPagination(value);
-              }}
+              setParams={setParams}
             />
           </CardContent>
         </Card>
