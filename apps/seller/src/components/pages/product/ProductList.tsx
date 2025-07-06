@@ -16,6 +16,8 @@ import RowDragHandle from '@repo/ui/components/row-drag-handle';
 import RowPin from '@repo/ui/components/row-pin';
 import { buildQueryParams } from '@repo/ui/utils/buildQueryParams';
 import { ColumnFiltersState } from '@tanstack/react-table';
+import { Fab } from '@repo/ui/components/fab';
+import { Edit, Eye, Trash } from 'lucide-react';
 
 const ProductList = () => {
   const columns = useMemo<ColumnDef<Person, unknown>[]>(
@@ -31,6 +33,23 @@ const ProductList = () => {
       },
       {
         id: 'actions',
+        header: 'Actions',
+        cell: () => (
+          <div className="flex items-center gap-4">
+            <Fab variant="outline" size="xs">
+              <Eye />
+            </Fab>
+            <Fab variant="outline" size="xs">
+              <Edit />
+            </Fab>
+            <Fab variant="destructive" size="xs">
+              <Trash />
+            </Fab>
+          </div>
+        ),
+        size: 140,
+        maxSize: 140,
+        enableColumnFilter: false,
       },
       {
         id: 'drag-handle',
@@ -188,7 +207,9 @@ const ProductList = () => {
               columns={columns}
               isError={isError}
               isLoading={isLoading || isFetching}
-              getQuery={setQuery}
+              getQuery={(value) => {
+                setQuery(value);
+              }}
             />
           </CardContent>
         </Card>
