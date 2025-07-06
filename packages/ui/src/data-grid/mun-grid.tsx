@@ -10,6 +10,8 @@ import { breakpoints } from '../utils/breakpoints';
 import Toolbar from './toolbar';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import Pagination from './pagination';
+import { PaginationState } from '@tanstack/react-table';
 const MunGridSplitLeft = dynamic(
   () => import('./mun-grid/mun-grid-split-left'),
   {
@@ -22,11 +24,18 @@ const MunGridSplitRight = dynamic(
 );
 
 interface MunGridProps<T> {
-  data?: T[];
+  data?: {
+    data: T[];
+    total: number;
+    page: number;
+    pageSize: number;
+  };
   columns: ColumnDef<T>[];
   isError: boolean;
   isLoading: boolean;
   getQuery?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  pagination?: number[];
+  getPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
 }
 
 const MunGrid = <T,>({
@@ -35,6 +44,8 @@ const MunGrid = <T,>({
   isError,
   isLoading,
   getQuery,
+  pagination = [20, 30, 40, 50, 60, 70, 80, 90, 100],
+  getPagination,
 }: MunGridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
@@ -44,6 +55,7 @@ const MunGrid = <T,>({
       isLoading={isLoading}
       isError={isError}
       getQuery={getQuery}
+      getPagination={getPagination}
     >
       <ColumnDnd>
         <div className="space-y-3 relative">
@@ -60,6 +72,7 @@ const MunGrid = <T,>({
             </Suspense>
             {sm && <Toolbar />}
           </div>
+          <Pagination pagination={pagination} />
         </div>
       </ColumnDnd>
     </DataGridProvider>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef, PaginationState } from '@tanstack/react-table';
 import {
   Card,
   CardContent,
@@ -187,11 +187,16 @@ const ProductList = () => {
     [],
   );
   const [query, setQuery] = useState<ColumnFiltersState>([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 20,
+  });
 
   const queryParams = buildQueryParams(query);
 
   const { data, isError, isLoading, isFetching } = useGetPersonsQuery({
     queryParams,
+    pagination,
   });
 
   return (
@@ -203,12 +208,15 @@ const ProductList = () => {
           </CardHeader>
           <CardContent>
             <MunGrid
-              data={data?.data}
+              data={data}
               columns={columns}
               isError={isError}
               isLoading={isLoading || isFetching}
               getQuery={(value) => {
                 setQuery(value);
+              }}
+              getPagination={(value) => {
+                setPagination(value);
               }}
             />
           </CardContent>

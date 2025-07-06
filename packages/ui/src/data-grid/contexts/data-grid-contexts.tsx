@@ -51,22 +51,29 @@ const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
 
 interface DataGridProviderProps<T> {
   children?: React.ReactNode;
-  data?: T[];
+  data?: {
+    data: T[];
+    total: number;
+    page: number;
+    pageSize: number;
+  };
   columns: ColumnDef<T>[];
   isLoading?: boolean;
   isError?: boolean;
   isSplit?: boolean;
   getQuery?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  getPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
 }
 
 export const DataGridProvider = <T,>({
   children,
-  data = [],
+  data,
   columns,
   isLoading,
   isError,
   isSplit = false,
   getQuery,
+  getPagination,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -89,8 +96,14 @@ export const DataGridProvider = <T,>({
     }
   }, [columnFilters, getQuery]);
 
+  useEffect(() => {
+    if (getPagination) {
+      getPagination(pagination);
+    }
+  }, [pagination, getPagination]);
+
   const table = useReactTable({
-    data,
+    data: data?.data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -104,7 +117,7 @@ export const DataGridProvider = <T,>({
     columnResizeMode: 'onChange',
     enableRowSelection: true,
     manualPagination: true,
-
+    rowCount: data?.total,
     state: {
       columnFilters,
       globalFilter,
