@@ -145,7 +145,7 @@ export const DataGridProvider = <T,>({
   });
 
   const [split, setSplit] = useState<boolean>(isSplit);
-  const sm = useBreakpoint(breakpoints.sm);
+  const sm = !useBreakpoint(breakpoints.sm);
 
   useEffect(() => {
     if (sm) {
