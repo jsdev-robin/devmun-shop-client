@@ -145,13 +145,20 @@ export const DataGridProvider = <T,>({
   });
 
   const [split, setSplit] = useState<boolean>(isSplit);
-  const sm = !useBreakpoint(breakpoints.sm);
+  const sm = useBreakpoint(breakpoints.sm);
 
   useEffect(() => {
     if (sm) {
+      table.resetRowSelection();
+      table.resetColumnFilters();
+      table.resetColumnVisibility();
+      table.resetPagination();
+      table.resetSorting();
+      table.resetGlobalFilter();
+      table.resetColumnPinning();
       setSplit(false);
     }
-  }, [sm]);
+  }, [sm, table]);
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
