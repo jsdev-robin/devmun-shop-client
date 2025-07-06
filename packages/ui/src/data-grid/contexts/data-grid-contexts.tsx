@@ -26,6 +26,8 @@ import useSyncScroll from '../hooks/useSyncScroll';
 import { useElementDimensions } from '../hooks/useElementDimensions';
 import { getAllLeafColumnIds } from '../../lib/getAllLeafColumnIds';
 import { buildQueryParams } from '../../utils/buildQueryParams';
+import { breakpoints } from '../../utils/breakpoints';
+import { useBreakpoint } from '../../hooks/use-breakpoint';
 
 interface DataGridContexttValue<T> {
   table: Table<T>;
@@ -143,6 +145,13 @@ export const DataGridProvider = <T,>({
   });
 
   const [split, setSplit] = useState<boolean>(isSplit);
+  const sm = !useBreakpoint(breakpoints.sm);
+
+  useEffect(() => {
+    if (sm) {
+      setSplit(false);
+    }
+  }, [sm]);
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);
