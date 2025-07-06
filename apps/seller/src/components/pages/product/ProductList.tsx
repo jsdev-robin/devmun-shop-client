@@ -29,6 +29,9 @@ const ProductList = () => {
         maxSize: 54,
       },
       {
+        id: 'actions',
+      },
+      {
         id: 'drag-handle',
         cell: ({ row }) => <RowDragHandle rowId={row.id} />,
         size: 36,
