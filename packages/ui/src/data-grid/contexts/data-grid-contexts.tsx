@@ -156,7 +156,6 @@ export const DataGridProvider = <T,>({
       table.resetSorting();
       table.resetGlobalFilter();
       table.resetColumnPinning();
-      setSplit(false);
     }
   }, [sm, table]);
 
