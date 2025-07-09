@@ -51,7 +51,7 @@ const SignIn = () => {
       {
         loading: 'Signing in...',
         success: (res) => {
-          window.location.href = '/';
+          window.location.reload();
           return res?.message || 'Signed in successfully.';
         },
         error: (err) =>

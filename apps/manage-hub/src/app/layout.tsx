@@ -106,7 +106,7 @@ export default function RootLayout({
             // disableTransitionOnChange
           >
             <AppProvider>{children}</AppProvider>
-            <Toaster position="top-center" richColors />
+            <Toaster position="bottom-right" richColors />
           </ThemeProvider>
         </StoreProvider>
       </body>

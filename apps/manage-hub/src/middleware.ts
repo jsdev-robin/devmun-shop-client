@@ -28,7 +28,7 @@ export default async function middleware(req: NextRequest) {
 
   // Handle path routes
   if (isProtectedRoute && !session) {
-    await utils.deleteSession('reT2k1z8');
+    await utils.deleteSession('aeuT2k1z9');
     return NextResponse.redirect(new URL('/sign-in', req.nextUrl));
   }
 
