@@ -1,7 +1,12 @@
 import React from 'react';
+import VerifyEmail from '../../../components/auth/pages/VerifiyEmail';
 
-const page = () => {
-  return <div>page</div>;
+const VerifyEmailPage = () => {
+  return (
+    <>
+      <VerifyEmail />
+    </>
+  );
 };
 
-export default page;
+export default VerifyEmailPage;
