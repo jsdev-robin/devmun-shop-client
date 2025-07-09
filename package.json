@@ -18,7 +18,11 @@
     "dev:admin": "turbo run dev --filter=admin",
     "build:admin": "turbo run build --filter=admin",
     "lint:admin": "turbo run lint --filter=admin",
-    "check-types:admin": "turbo run check-types --filter=admin"
+    "check-types:admin": "turbo run check-types --filter=admin",
+    "dev:manage-hub": "turbo run dev --filter=manage-hub",
+    "build:manage-hub": "turbo run build --filter=manage-hub",
+    "lint:manage-hub": "turbo run lint --filter=manage-hub",
+    "check-types:manage-hub": "turbo run check-types --filter=manage-hub"
   },
   "devDependencies": {
     "prettier": "^3.6.0",

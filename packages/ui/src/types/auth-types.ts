@@ -1,4 +1,4 @@
-export type Role = 'buyer' | 'seller' | 'admin' | 'moderator';
+export type Role = 'user' | 'seller' | 'admin';
 
 export interface IUser {
   _id: string;
@@ -10,7 +10,7 @@ export interface IUser {
 }
 
 export interface AuthState {
-  verificationToken: string | null;
+  verifyToken: string | null;
   user: IUser | null;
   isAuth: boolean;
 }
@@ -20,11 +20,13 @@ export interface SuccessResponse {
   message: string;
 }
 
-export interface SingupResponse extends SuccessResponse {
+// Sign-up
+export interface SignupResponse extends SuccessResponse {
   data: {
     token: string;
   };
 }
+
 export interface SingupRequest {
   firstName: string;
   lastName: string;
@@ -33,13 +35,17 @@ export interface SingupRequest {
   passwordConfirm: string;
 }
 
+// Verify
 export interface VerifyEmailRequest {
   token: string;
   otp: number;
 }
 
+// Sign-in
 export interface SinginResponse extends SuccessResponse {
-  role: Role;
+  data: {
+    role: Role;
+  };
 }
 
 export interface SinginRequest {
