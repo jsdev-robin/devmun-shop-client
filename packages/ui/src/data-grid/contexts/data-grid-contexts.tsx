@@ -4,7 +4,6 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -25,9 +24,6 @@ import {
 import useSyncScroll from '../hooks/useSyncScroll';
 import { useElementDimensions } from '../hooks/useElementDimensions';
 import { getAllLeafColumnIds } from '../../lib/getAllLeafColumnIds';
-import { buildQueryParams } from '../../utils/buildQueryParams';
-import { breakpoints } from '../../utils/breakpoints';
-import { useBreakpoint } from '../../hooks/use-breakpoint';
 
 interface DataGridContexttValue<T> {
   table: Table<T>;
@@ -65,14 +61,11 @@ interface DataGridProviderProps<T> {
   isLoading?: boolean;
   isError?: boolean;
   isSplit?: boolean;
-  setParams?: ({
-    queryParams,
-    pagination,
-  }: {
-    queryParams: string;
-    pagination: PaginationState;
-  }) => void;
   pin?: ColumnPinningState;
+  pagination?: PaginationState;
+  setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
+  columnFilters?: ColumnFiltersState;
+  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
 }
 
 export const DataGridProvider = <T,>({
@@ -82,36 +75,24 @@ export const DataGridProvider = <T,>({
   isLoading,
   isError,
   isSplit = false,
-  setParams,
   pin = {},
+  pagination,
+  setPagination,
+  columnFilters,
+  setColumnFilters,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
   );
   const [globalFilter, setGlobalFilter] = useState('');
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 20,
-  });
+
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     pin: false,
     'drag-handle': false,
   });
 
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>(pin);
-
-  const queryParams = buildQueryParams(columnFilters);
-
-  useEffect(() => {
-    if (setParams) {
-      setParams({
-        queryParams: queryParams ?? '',
-        pagination: pagination,
-      });
-    }
-  }, [pagination, queryParams, setParams]);
 
   const table = useReactTable({
     data: data?.data ?? [],
@@ -135,29 +116,16 @@ export const DataGridProvider = <T,>({
       globalFilter,
       columnOrder,
       rowSelection,
-      pagination,
+      pagination: pagination,
       columnVisibility,
       columnPinning,
     },
-    defaultColumn: {
-      minSize: 180,
-    },
+    // defaultColumn: {
+    //   minSize: 180,
+    // },
   });
 
   const [split, setSplit] = useState<boolean>(isSplit);
-  const sm = !useBreakpoint(breakpoints.sm);
-
-  useEffect(() => {
-    if (sm) {
-      table.resetRowSelection();
-      table.resetColumnFilters();
-      table.resetColumnVisibility();
-      table.resetPagination();
-      table.resetSorting();
-      table.resetGlobalFilter();
-      table.resetColumnPinning();
-    }
-  }, [sm, table]);
 
   const paneRef1 = useRef<HTMLDivElement>(null);
   const paneRef2 = useRef<HTMLDivElement>(null);

@@ -31,7 +31,7 @@ const ToolbarFilter = <T,>({ column }: { column: Column<T, unknown> }) => {
     <>
       {column.getCanFilter() ? (
         <Collapsible open={open} onOpenChange={setOpen}>
-          <CollapsibleTrigger className="flex items-center gap-2">
+          <CollapsibleTrigger className="flex whitespace-nowrap items-center gap-2">
             <span className="size-7 inline-flex items-center justify-center rounded-md transition-all hover:bg-card">
               {open ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
             </span>

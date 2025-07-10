@@ -13,7 +13,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signup: builder.mutation<SignupResponse, SingupRequest>({
       query: (body) => ({
-        url: '/auth/signup',
+        url: '/hub/auth/signup',
         method: 'POST',
         body,
       }),
@@ -29,7 +29,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
 
     verifyEmail: builder.mutation<SuccessResponse, VerifyEmailRequest>({
       query: ({ token, otp }) => ({
-        url: '/auth/verify-email',
+        url: '/hub/auth/verify-email',
         method: 'POST',
         body: { token, otp },
       }),
@@ -37,7 +37,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
 
     signin: builder.mutation<SinginResponse, SinginRequest>({
       query: ({ email, password, remember }) => ({
-        url: '/auth/signin',
+        url: '/hub/auth/signin',
         method: 'POST',
         body: { email, password, remember },
       }),
@@ -45,7 +45,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
 
     signout: builder.mutation<SuccessResponse, void>({
       query: () => ({
-        url: '/auth/signout',
+        url: '/hub/auth/signout',
         method: 'POST',
       }),
     }),

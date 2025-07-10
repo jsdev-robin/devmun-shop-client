@@ -1,5 +1,6 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   ColumnPinningState,
   PaginationState,
 } from '@tanstack/react-table';
@@ -14,18 +15,14 @@ export interface GridProps<T> {
   columns: ColumnDef<T>[];
   isError: boolean;
   isLoading: boolean;
-  pagination?: number[];
-  setParams?: ({
-    queryParams,
-    pagination,
-  }: {
-    queryParams: string;
-    pagination: PaginationState;
-  }) => void;
   toolbar?: {
     active?: boolean;
     open?: 'columns' | 'toolbar' | 'filter' | null;
   };
   isSplit?: boolean;
   pin?: ColumnPinningState;
+  pagination?: PaginationState;
+  setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
+  columnFilters?: ColumnFiltersState;
+  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
 }

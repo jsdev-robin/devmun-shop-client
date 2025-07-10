@@ -28,8 +28,6 @@ const MunGrid = <T,>({
   columns,
   isError,
   isLoading,
-  pagination = [20, 30, 40, 50, 60, 70, 80, 90, 100],
-  setParams,
   toolbar = {
     active: true,
     open: null,
@@ -44,7 +42,6 @@ const MunGrid = <T,>({
       columns={columns}
       isLoading={isLoading}
       isError={isError}
-      setParams={setParams}
       isSplit={isSplit}
       pin={pin}
     >
@@ -63,7 +60,7 @@ const MunGrid = <T,>({
             </Suspense>
             {toolbar.active && sm && <Toolbar open={toolbar.open} />}
           </div>
-          <Pagination pagination={pagination} />
+          <Pagination pagination={[20, 30, 40, 50, 60, 70, 80, 90, 100]} />
         </div>
       </ColumnDnd>
     </DataGridProvider>

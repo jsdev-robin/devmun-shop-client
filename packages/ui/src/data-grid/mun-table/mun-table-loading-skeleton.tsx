@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useDataGrid } from '../contexts/data-grid-contexts';
 import { Table, TableBody, TableCell, TableRow } from './mun-table-layout';
 import { getPinStyles } from '../utils/getPinStyles';
@@ -46,4 +46,4 @@ const MunTableLoadingSkeleton = () => {
   );
 };
 
-export default memo(MunTableLoadingSkeleton);
+export default MunTableLoadingSkeleton;
