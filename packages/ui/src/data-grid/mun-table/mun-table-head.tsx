@@ -11,7 +11,7 @@ import GridHeaderSort from '../header/grid-header-sort';
 import GridHeaderDnd from '../header/grid-header-dnd';
 import GridHeaderMenu from '../header/grid-header-menu';
 import GridHeaderFilter from '../header/grid-header-filter';
-import GridHeaderResize from '../header/grid-header-resize';
+// import GridHeaderResize from '../header/grid-header-resize';
 import { Header } from '@tanstack/react-table';
 
 const MunTableHead = <T,>({ header }: { header: Header<T, unknown> }) => {
@@ -52,7 +52,7 @@ const MunTableHead = <T,>({ header }: { header: Header<T, unknown> }) => {
             </div>
             <GridHeaderFilter column={header.column} />
           </div>
-          <GridHeaderResize header={header} />
+          {/* <GridHeaderResize header={header} /> */}
         </>
       )}
     </TableHead>

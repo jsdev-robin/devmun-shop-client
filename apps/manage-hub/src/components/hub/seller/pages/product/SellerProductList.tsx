@@ -104,60 +104,38 @@ const SellerProductList = () => {
             header: 'Title',
             cell: (info) => info.getValue(),
             enableHiding: false,
+            meta: {
+              filterVariant: 'text',
+            },
           },
           {
             id: 'basicInfo.description',
             accessorKey: 'basicInfo.description',
             header: 'Description',
-            cell: (info) => info.getValue(),
+            cell: (info) => (
+              <span title={info.getValue()}>{info.getValue()}</span>
+            ),
+            meta: {
+              filterVariant: 'text',
+            },
           },
           {
             id: 'basicInfo.productType',
             accessorKey: 'basicInfo.productType',
             header: 'Product Type',
             cell: (info) => info.getValue(),
+            meta: {
+              filterVariant: 'select',
+            },
           },
           {
             id: 'basicInfo.productCode',
             accessorKey: 'basicInfo.productCode',
             header: 'Product Code',
             cell: (info) => info.getValue(),
-          },
-        ],
-      },
-      {
-        id: 'inventory',
-        header: 'Inventory',
-        columns: [
-          {
-            id: 'inventory.sku',
-            accessorKey: 'inventory.sku',
-            header: 'SKU',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'inventory.barcode',
-            accessorKey: 'inventory.barcode',
-            header: 'Barcode',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'inventory.batchNumber',
-            accessorKey: 'inventory.batchNumber',
-            header: 'Batch Number',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'inventory.expiryDate',
-            accessorKey: 'inventory.expiryDate',
-            header: 'Expiry Date',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'inventory.warehouseLocation',
-            accessorKey: 'inventory.warehouseLocation',
-            header: 'Warehouse Location',
-            cell: (info) => info.getValue(),
+            meta: {
+              filterVariant: 'text',
+            },
           },
         ],
       },
@@ -170,266 +148,9 @@ const SellerProductList = () => {
             accessorKey: 'pricing.basePrice',
             header: 'Base Price',
             cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.salePrice',
-            accessorKey: 'pricing.salePrice',
-            header: 'Sale Price',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.costPrice',
-            accessorKey: 'pricing.costPrice',
-            header: 'Cost Price',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.priceCurrency',
-            accessorKey: 'pricing.priceCurrency',
-            header: 'Currency',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.minOrderQuantity',
-            accessorKey: 'pricing.minOrderQuantity',
-            header: 'Min Order Qty',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.maxOrderQuantity',
-            accessorKey: 'pricing.maxOrderQuantity',
-            header: 'Max Order Qty',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.taxRate',
-            accessorKey: 'pricing.taxRate',
-            header: 'Tax Rate',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.taxInclusive',
-            accessorKey: 'pricing.taxInclusive',
-            header: 'Tax Inclusive',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.taxAmount',
-            accessorKey: 'pricing.taxAmount',
-            header: 'Tax Amount',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.discountType',
-            accessorKey: 'pricing.discountType',
-            header: 'Discount Type',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.discountValue',
-            accessorKey: 'pricing.discountValue',
-            header: 'Discount Value',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.discountStartDate',
-            accessorKey: 'pricing.discountStartDate',
-            header: 'Discount Start',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.discountEndDate',
-            accessorKey: 'pricing.discountEndDate',
-            header: 'Discount End',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.shippingCost',
-            accessorKey: 'pricing.shippingCost',
-            header: 'Shipping Cost',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'pricing.shippingCostType',
-            accessorKey: 'pricing.shippingCostType',
-            header: 'Shipping Cost Type',
-            cell: (info) => info.getValue(),
-          },
-        ],
-      },
-      {
-        id: 'categories',
-        header: 'Categories',
-        columns: [
-          {
-            id: 'categories.mainCategory',
-            accessorKey: 'categories.mainCategory',
-            header: 'Main Category',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'categories.subCategory',
-            accessorKey: 'categories.subCategory',
-            header: 'Sub Category',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'categories.tertiaryCategory',
-            accessorKey: 'categories.tertiaryCategory',
-            header: 'Tertiary Category',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'categories.productTags',
-            accessorKey: 'categories.productTags',
-            header: 'Tags',
-            cell: (info) => (info.getValue() as string[]).join(', '),
-          },
-        ],
-      },
-      {
-        id: 'attributes',
-        header: 'Attributes',
-        columns: [
-          {
-            id: 'attributes.brand',
-            accessorKey: 'attributes.brand',
-            header: 'Brand',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.manufacturer',
-            accessorKey: 'attributes.manufacturer',
-            header: 'Manufacturer',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.model',
-            accessorKey: 'attributes.model',
-            header: 'Model',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.color',
-            accessorKey: 'attributes.color',
-            header: 'Color',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.size',
-            accessorKey: 'attributes.size',
-            header: 'Size',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.material',
-            accessorKey: 'attributes.material',
-            header: 'Material',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'attributes.weight',
-            accessorKey: 'attributes.weight',
-            header: 'Weight',
-            cell: (info) => info.getValue(),
-          },
-        ],
-      },
-      {
-        id: 'shipping',
-        header: 'Shipping',
-        columns: [
-          {
-            id: 'shipping.shippingClass',
-            accessorKey: 'shipping.shippingClass',
-            header: 'Shipping Class',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'shipping.isFreeShipping',
-            accessorKey: 'shipping.isFreeShipping',
-            header: 'Free Shipping',
-            cell: (info) => (info.getValue() ? 'Yes' : 'No'),
-          },
-          {
-            id: 'shipping.requiresShipping',
-            accessorKey: 'shipping.requiresShipping',
-            header: 'Requires Shipping',
-            cell: (info) => (info.getValue() ? 'Yes' : 'No'),
-          },
-        ],
-      },
-      {
-        id: 'seo',
-        header: 'SEO',
-        columns: [
-          {
-            id: 'seo.metaTitle',
-            accessorKey: 'seo.metaTitle',
-            header: 'Meta Title',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'seo.metaDescription',
-            accessorKey: 'seo.metaDescription',
-            header: 'Meta Description',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'seo.canonicalUrl',
-            accessorKey: 'seo.canonicalUrl',
-            header: 'Canonical URL',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'seo.keywords',
-            accessorKey: 'seo.keywords',
-            header: 'Keywords',
-            cell: (info) => (info.getValue() as string[]).join(', '),
-          },
-          {
-            id: 'seo.slug',
-            accessorKey: 'seo.slug',
-            header: 'Slug',
-            cell: (info) => info.getValue(),
-          },
-        ],
-      },
-      {
-        id: 'status',
-        header: 'Status',
-        columns: [
-          {
-            id: 'status',
-            accessorKey: 'status',
-            header: 'Status',
-            cell: (info) => info.getValue(),
-          },
-          {
-            id: 'isAdult',
-            accessorKey: 'isAdult',
-            header: 'Adult Content',
-            cell: (info) => (info.getValue() ? 'Yes' : 'No'),
-          },
-        ],
-      },
-      {
-        id: 'dates',
-        header: 'Dates',
-        columns: [
-          {
-            id: 'createdAt',
-            accessorKey: 'createdAt',
-            header: 'Created At',
-            cell: (info) =>
-              new Date(info.getValue() as string).toLocaleString(),
-          },
-          {
-            id: 'updatedAt',
-            accessorKey: 'updatedAt',
-            header: 'Updated At',
-            cell: (info) =>
-              new Date(info.getValue() as string).toLocaleString(),
+            meta: {
+              filterVariant: 'range',
+            },
           },
         ],
       },

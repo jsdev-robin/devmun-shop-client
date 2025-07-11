@@ -22,7 +22,7 @@ export const userAuthApi = apiSlice.injectEndpoints({
           const { data } = await queryFulfilled;
           dispatch(signup({ token: data.data.token }));
         } catch (error) {
-          console.error('Signup error:', error);
+          console.log('Signup error:', error);
         }
       },
     }),
