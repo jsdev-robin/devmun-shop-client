@@ -49,6 +49,13 @@ export const userAuthApi = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+
+    refreshToken: builder.mutation<void, void>({
+      query: () => ({
+        url: '/hub/auth/refresh-token',
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -57,4 +64,5 @@ export const {
   useVerifyEmailMutation,
   useSigninMutation,
   useSignoutMutation,
+  useRefreshTokenMutation,
 } = userAuthApi;
