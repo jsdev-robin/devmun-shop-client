@@ -5,7 +5,7 @@ export const sellerProductEndpoints = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     readMyAll: builder.query<ProductResponse, GetQueryParams>({
       query: ({ pagination, queryParams, sort, globalFilter }) => {
-        let url = `/seller/product?page=${pagination?.pageIndex}&limit=${pagination?.pageSize}`;
+        let url = `/seller/product?page=${(pagination?.pageIndex ?? 0) + 1}&limit=${pagination?.pageSize}`;
         if (queryParams) {
           url += `&${queryParams}`;
         }

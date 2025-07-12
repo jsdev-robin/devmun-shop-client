@@ -170,6 +170,8 @@ const SellerProductList = () => {
   const queryParams = buildQueryParams(columnFilters);
   const sort = getSortString(sorting);
 
+  console.log(pagination);
+
   const { data, isError, isLoading, isFetching } = useReadMyAllQuery({
     pagination,
     queryParams,
