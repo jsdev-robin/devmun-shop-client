@@ -36,6 +36,8 @@ const MunTable = <T,>({
   setPagination,
   columnFilters,
   setColumnFilters,
+  sorting,
+  setSorting,
 }: GridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
@@ -50,6 +52,8 @@ const MunTable = <T,>({
       setPagination={setPagination}
       columnFilters={columnFilters}
       setColumnFilters={setColumnFilters}
+      sorting={sorting}
+      setSorting={setSorting}
     >
       <ColumnDnd>
         <div className="space-y-3 relative">

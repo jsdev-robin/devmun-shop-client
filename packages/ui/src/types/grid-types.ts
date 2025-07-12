@@ -3,6 +3,7 @@ import {
   ColumnFiltersState,
   ColumnPinningState,
   PaginationState,
+  SortingState,
 } from '@tanstack/react-table';
 
 export interface GridProps<T> {
@@ -25,4 +26,6 @@ export interface GridProps<T> {
   setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
   columnFilters?: ColumnFiltersState;
   setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  sorting?: SortingState;
+  setSorting?: React.Dispatch<React.SetStateAction<SortingState>>;
 }

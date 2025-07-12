@@ -4,8 +4,8 @@ import { apiSlice } from '../../../../api/api';
 export const sellerProductEndpoints = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     readMyAll: builder.query<ProductResponse, GetQueryParams>({
-      query: ({ pagination, queryParams }) => ({
-        url: `/seller/product?page=${pagination?.pageIndex ?? 0}&limit=${pagination?.pageSize ?? 20}&${queryParams}`,
+      query: ({ pagination, queryParams, sort }) => ({
+        url: `/seller/product?page=${pagination?.pageIndex ?? 0}&limit=${pagination?.pageSize ?? 20}&${queryParams}&sort=${sort}`,
         method: 'GET',
       }),
       keepUnusedDataFor: 300,

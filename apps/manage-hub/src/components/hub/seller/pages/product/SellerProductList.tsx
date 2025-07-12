@@ -22,6 +22,8 @@ import RowDragHandle from '@repo/ui/components/row-drag-handle';
 import RowPin from '@repo/ui/components/row-pin';
 import { Fab } from '@repo/ui/components/fab';
 import { Edit, Eye, Trash } from 'lucide-react';
+import { SortingState } from '@tanstack/react-table';
+import { getSortString } from '@repo/ui/utils/getSortString';
 
 const SellerProductList = () => {
   const columns = useMemo<ColumnDef<IProduct, unknown>[]>(
@@ -163,11 +165,16 @@ const SellerProductList = () => {
     pageSize: 20,
   });
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const queryParams = buildQueryParams(columnFilters);
+  const sort = getSortString(sorting);
+
+  console.log(sort);
 
   const { data, isError, isLoading, isFetching } = useReadMyAllQuery({
     pagination,
     queryParams,
+    sort,
   });
 
   return (
@@ -187,6 +194,8 @@ const SellerProductList = () => {
               setPagination={setPagination}
               columnFilters={columnFilters}
               setColumnFilters={setColumnFilters}
+              sorting={sorting}
+              setSorting={setSorting}
             />
           </CardContent>
         </Card>

@@ -3,6 +3,7 @@ import { IProduct } from './product-types';
 
 export type GetQueryParams = {
   pagination?: PaginationState;
+  sort?: string;
   queryParams?: string;
 };
 

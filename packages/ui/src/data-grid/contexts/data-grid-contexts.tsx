@@ -15,7 +15,6 @@ import {
   getCoreRowModel,
   getFacetedMinMaxValues,
   getFacetedUniqueValues,
-  getSortedRowModel,
   PaginationState,
   Table,
   useReactTable,
@@ -24,6 +23,7 @@ import {
 import useSyncScroll from '../hooks/useSyncScroll';
 import { useElementDimensions } from '../hooks/useElementDimensions';
 import { getAllLeafColumnIds } from '../../lib/getAllLeafColumnIds';
+import { SortingState } from '@tanstack/react-table';
 
 interface DataGridContexttValue<T> {
   table: Table<T>;
@@ -50,22 +50,24 @@ interface DataGridContexttValue<T> {
 const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
 
 interface DataGridProviderProps<T> {
-  children?: React.ReactNode;
-  data?: {
+  children: React.ReactNode;
+  data: {
     data: T[];
     total: number;
     page: number;
     pageSize: number;
   };
   columns: ColumnDef<T>[];
-  isLoading?: boolean;
-  isError?: boolean;
-  isSplit?: boolean;
-  pin?: ColumnPinningState;
-  pagination?: PaginationState;
-  setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
-  columnFilters?: ColumnFiltersState;
-  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  isLoading: boolean;
+  isError: boolean;
+  isSplit: boolean;
+  pin: ColumnPinningState;
+  pagination: PaginationState;
+  setPagination: React.Dispatch<React.SetStateAction<PaginationState>>;
+  columnFilters: ColumnFiltersState;
+  setColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  sorting: SortingState;
+  setSorting: React.Dispatch<React.SetStateAction<SortingState>>;
 }
 
 export const DataGridProvider = <T,>({
@@ -76,10 +78,15 @@ export const DataGridProvider = <T,>({
   isError,
   isSplit = false,
   pin = {},
-  pagination,
+  pagination = {
+    pageIndex: 0,
+    pageSize: 20,
+  },
   setPagination,
   columnFilters,
   setColumnFilters,
+  sorting,
+  setSorting,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
@@ -98,7 +105,7 @@ export const DataGridProvider = <T,>({
     data: data?.data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    // getSortedRowModel: getSortedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
     onColumnFiltersChange: setColumnFilters,
@@ -107,6 +114,7 @@ export const DataGridProvider = <T,>({
     onPaginationChange: setPagination,
     onRowSelectionChange: setRowSelection,
     onColumnPinningChange: setColumnPinning,
+    onSortingChange: setSorting,
     columnResizeMode: 'onChange',
     enableRowSelection: true,
     manualPagination: true,
@@ -116,13 +124,14 @@ export const DataGridProvider = <T,>({
       globalFilter,
       columnOrder,
       rowSelection,
-      pagination: pagination,
+      pagination,
       columnVisibility,
       columnPinning,
+      sorting,
     },
-    // defaultColumn: {
-    //   minSize: 180,
-    // },
+    defaultColumn: {
+      minSize: 180,
+    },
   });
 
   const [split, setSplit] = useState<boolean>(isSplit);
