@@ -28,4 +28,6 @@ export interface GridProps<T> {
   setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
   sorting?: SortingState;
   setSorting?: React.Dispatch<React.SetStateAction<SortingState>>;
+  globalFilter?: string;
+  setGlobalFilter?: React.Dispatch<React.SetStateAction<string>>;
 }

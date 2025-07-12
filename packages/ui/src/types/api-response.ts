@@ -5,6 +5,7 @@ export type GetQueryParams = {
   pagination?: PaginationState;
   sort?: string;
   queryParams?: string;
+  globalFilter?: string;
 };
 
 export interface PaginatedResponse<T> {

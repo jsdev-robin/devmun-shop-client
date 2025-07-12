@@ -38,6 +38,8 @@ const MunTable = <T,>({
   setColumnFilters,
   sorting,
   setSorting,
+  globalFilter,
+  setGlobalFilter,
 }: GridProps<T>) => {
   const sm = !useBreakpoint(breakpoints.sm);
   return (
@@ -54,6 +56,8 @@ const MunTable = <T,>({
       setColumnFilters={setColumnFilters}
       sorting={sorting}
       setSorting={setSorting}
+      globalFilter={globalFilter}
+      setGlobalFilter={setGlobalFilter}
     >
       <ColumnDnd>
         <div className="space-y-3 relative">

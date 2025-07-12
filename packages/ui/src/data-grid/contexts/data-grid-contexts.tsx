@@ -68,6 +68,8 @@ interface DataGridProviderProps<T> {
   setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
   sorting?: SortingState;
   setSorting?: React.Dispatch<React.SetStateAction<SortingState>>;
+  globalFilter?: string;
+  setGlobalFilter?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const DataGridProvider = <T,>({
@@ -87,11 +89,12 @@ export const DataGridProvider = <T,>({
   setColumnFilters,
   sorting,
   setSorting,
+  globalFilter,
+  setGlobalFilter,
 }: DataGridProviderProps<T>) => {
   const [columnOrder, setColumnOrder] = useState<string[]>(() =>
     getAllLeafColumnIds(columns),
   );
-  const [globalFilter, setGlobalFilter] = useState('');
   const [rowSelection, setRowSelection] = useState({});
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({

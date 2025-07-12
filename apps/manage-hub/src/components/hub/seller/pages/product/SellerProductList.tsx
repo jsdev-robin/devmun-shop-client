@@ -164,17 +164,17 @@ const SellerProductList = () => {
     pageIndex: 0,
     pageSize: 20,
   });
+  const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const queryParams = buildQueryParams(columnFilters);
   const sort = getSortString(sorting);
 
-  console.log(sort);
-
   const { data, isError, isLoading, isFetching } = useReadMyAllQuery({
     pagination,
     queryParams,
     sort,
+    globalFilter,
   });
 
   return (
@@ -196,6 +196,8 @@ const SellerProductList = () => {
               setColumnFilters={setColumnFilters}
               sorting={sorting}
               setSorting={setSorting}
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
             />
           </CardContent>
         </Card>
