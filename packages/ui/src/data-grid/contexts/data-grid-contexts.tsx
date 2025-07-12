@@ -51,7 +51,7 @@ const DataGridContextt = createContext<DataGridContexttValue<any> | null>(null);
 
 interface DataGridProviderProps<T> {
   children: React.ReactNode;
-  data: {
+  data?: {
     data: T[];
     total: number;
     page: number;
@@ -60,14 +60,14 @@ interface DataGridProviderProps<T> {
   columns: ColumnDef<T>[];
   isLoading: boolean;
   isError: boolean;
-  isSplit: boolean;
-  pin: ColumnPinningState;
-  pagination: PaginationState;
-  setPagination: React.Dispatch<React.SetStateAction<PaginationState>>;
-  columnFilters: ColumnFiltersState;
-  setColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
-  sorting: SortingState;
-  setSorting: React.Dispatch<React.SetStateAction<SortingState>>;
+  isSplit?: boolean;
+  pin?: ColumnPinningState;
+  pagination?: PaginationState;
+  setPagination?: React.Dispatch<React.SetStateAction<PaginationState>>;
+  columnFilters?: ColumnFiltersState;
+  setColumnFilters?: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+  sorting?: SortingState;
+  setSorting?: React.Dispatch<React.SetStateAction<SortingState>>;
 }
 
 export const DataGridProvider = <T,>({
