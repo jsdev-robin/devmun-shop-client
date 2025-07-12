@@ -12,7 +12,21 @@ const mutex = new Mutex();
 const rawBaseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_SERVER_URL,
   credentials: 'include',
+  prepareHeaders: (headers) => {
+    headers.set('Content-Type', 'application/json');
+    return headers;
+  },
 });
+
+const SKIP_REFRESH_ENDPOINTS = [
+  '/hub/auth/signin',
+  '/hub/auth/signup',
+  '/hub/auth/verify-email',
+  '/hub/auth/forgot-password',
+  '/hub/auth/reset-password',
+];
+
+const MAX_RETRIES = 2;
 
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
@@ -22,39 +36,59 @@ const baseQueryWithReauth: BaseQueryFn<
   await mutex.waitForUnlock();
 
   let result = await rawBaseQuery(args, api, extraOptions);
+  let retryCount = 0;
 
-  if (result.error && result.error.status === 401) {
-    if (!mutex.isLocked()) {
-      const release = await mutex.acquire();
-      try {
-        const refreshResult = await rawBaseQuery(
-          {
-            url: '/hub/auth/refresh-token',
-            method: 'POST',
-          },
-          api,
-          extraOptions,
-        );
+  const shouldSkipRefresh =
+    typeof args !== 'string' &&
+    args.url &&
+    SKIP_REFRESH_ENDPOINTS.some((endpoint) => args.url.startsWith(endpoint));
 
-        if (refreshResult?.error) {
-          return refreshResult;
+  if (result.error && result.error.status === 401 && !shouldSkipRefresh) {
+    while (retryCount < MAX_RETRIES) {
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+        try {
+          const refreshResult = await rawBaseQuery(
+            {
+              url: '/hub/auth/refresh-token',
+              method: 'POST',
+            },
+            api,
+            extraOptions,
+          );
+
+          if (refreshResult?.error) {
+            if (refreshResult.error.status === 403) {
+              window.location.href = '/sign-in';
+              return refreshResult;
+            }
+            break;
+          }
+
+          result = await rawBaseQuery(args, api, extraOptions);
+          if (!result.error) break;
+        } finally {
+          release();
         }
-
+      } else {
+        await mutex.waitForUnlock();
         result = await rawBaseQuery(args, api, extraOptions);
-      } finally {
-        release();
+        if (!result.error) break;
       }
-    } else {
-      await mutex.waitForUnlock();
-      result = await rawBaseQuery(args, api, extraOptions);
+      retryCount++;
     }
+  }
+
+  if (result.error && result.error.status === 403) {
+    window.location.href = '/sign-in';
   }
 
   return result;
 };
 
 export const apiSlice = createApi({
-  reducerPath: 'manage-hub-api',
+  reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['User', 'Posts'],
   endpoints: () => ({}),
 });
