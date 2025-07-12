@@ -1,5 +1,17 @@
 export function getSortString(
-  sortOptions: { id: string; desc: boolean }[],
+  sortOptions: { id: string; desc: boolean }[] | null | undefined,
 ): string {
-  return sortOptions.map((opt) => (opt.desc ? opt.id : `-${opt.id}`)).join(' ');
+  if (!sortOptions || sortOptions.length === 0) {
+    return '';
+  }
+
+  const validSorts = sortOptions
+    .filter((opt) => opt.id != null && opt.id.trim() !== '')
+    .map((opt) => (opt.desc ? opt.id : `-${opt.id}`));
+
+  if (validSorts.length === 0) {
+    return '';
+  }
+
+  return `sort=${validSorts.join(',')}`;
 }
