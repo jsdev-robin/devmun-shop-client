@@ -60,7 +60,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ open }) => {
   }, [searchTerm, table]);
 
   return (
-    <div className="bg-muted flex overflow-hidden">
+    <div className="bg-muted overflow-hidden hidden sm:flex">
       {activePanel === 'columns' && (
         <div className={cn('w-60 border-l border-border transition-all')}>
           <div className="space-y-3">

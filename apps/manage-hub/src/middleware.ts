@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 const route = {
   path: {
     protected: {
-      admin: ['/admin/overview'],
-      seller: ['/seller/overview'],
+      admin: ['/admin'],
+      seller: ['/seller'],
     },
     public: ['/sign-in', '/sign-up', '/verify-email'],
   },
@@ -18,8 +18,12 @@ export default async function middleware(req: NextRequest) {
 
   // Check for path routes
   const isProtectedRoute =
-    route.path.protected.admin.includes(path) ||
-    route.path.protected.seller.includes(path);
+    route.path.protected.admin.some((protectedPath) =>
+      path.startsWith(protectedPath),
+    ) ||
+    route.path.protected.seller.some((protectedPath) =>
+      path.startsWith(protectedPath),
+    );
   const ispathPublicRoute = route.path.public.includes(path);
 
   // Decrypt the path session
@@ -43,12 +47,19 @@ export default async function middleware(req: NextRequest) {
 
   // Check role-based access for path protected routes
   if (session) {
-    if (route.path.protected.admin.includes(path) && session.role !== 'admin') {
+    if (
+      route.path.protected.admin.some((protectedPath) =>
+        path.startsWith(protectedPath),
+      ) &&
+      session.role !== 'admin'
+    ) {
       return NextResponse.redirect(new URL('/seller/overview', req.nextUrl));
     }
 
     if (
-      route.path.protected.seller.includes(path) &&
+      route.path.protected.seller.some((protectedPath) =>
+        path.startsWith(protectedPath),
+      ) &&
       session.role !== 'seller'
     ) {
       return NextResponse.redirect(new URL('/admin/overview', req.nextUrl));
