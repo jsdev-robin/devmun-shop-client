@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from '@repo/ui/types/auth-types';
+import { userAuthApi } from './authApi';
 
 const initialState: AuthState = {
   verifyToken: null,
@@ -19,6 +20,24 @@ export const authSlice = createSlice({
     ) => {
       state.verifyToken = action.payload.token;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      userAuthApi.endpoints.getProfile.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload.data.user;
+        state.isAuth = true;
+      },
+    );
+    builder.addMatcher(
+      userAuthApi.endpoints.signout.matchFulfilled,
+      (state) => {
+        state.user = null;
+        state.isAuth = false;
+        state.verifyToken = null;
+      },
+    );
   },
 });
 

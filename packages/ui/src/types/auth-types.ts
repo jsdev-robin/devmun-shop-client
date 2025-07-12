@@ -5,6 +5,7 @@ export interface IUser {
   id: string;
   firstName: string;
   lastName: string;
+  fullName: string;
   email: string;
   password?: string;
 }
@@ -52,4 +53,11 @@ export interface SinginRequest {
   email: string;
   password: string;
   remember?: boolean;
+}
+
+// Get Profile
+export interface GetProfileResponse extends SuccessResponse {
+  data: {
+    user: IUser;
+  };
 }

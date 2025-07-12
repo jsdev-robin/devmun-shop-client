@@ -1,4 +1,5 @@
 import {
+  GetProfileResponse,
   SignupResponse,
   SinginRequest,
   SinginResponse,
@@ -56,6 +57,11 @@ export const userAuthApi = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+
+    getProfile: builder.query<GetProfileResponse, void>({
+      query: () => '/hub/auth/me',
+      keepUnusedDataFor: 300,
+    }),
   }),
 });
 
@@ -65,4 +71,5 @@ export const {
   useSigninMutation,
   useSignoutMutation,
   useRefreshTokenMutation,
+  useGetProfileQuery,
 } = userAuthApi;

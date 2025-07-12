@@ -1,3 +1,5 @@
+'use client';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +22,10 @@ import {
 import Text from '@repo/ui/components/text';
 import { useSignoutMutation } from '../../../../../lib/features/services/auth/authApi';
 import { toast } from 'sonner';
+import useUser from '../../../guard/useUser';
 
 const SellerHeaderMenu = () => {
+  const user = useUser();
   const [signout, { isLoading }] = useSignoutMutation();
 
   const handleLogout = async () => {
@@ -40,7 +44,10 @@ const SellerHeaderMenu = () => {
       <DropdownMenuTrigger className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src="/images/avatars/01.jpg" alt="Robin" />
-          <AvatarFallback>LR</AvatarFallback>
+          <AvatarFallback>
+            {user?.firstName?.[0]}
+            {user?.lastName?.[0] || 'US'}
+          </AvatarFallback>
         </Avatar>
         <Text
           variant="body2"
@@ -48,7 +55,7 @@ const SellerHeaderMenu = () => {
           weight="medium"
           className="hidden lg:block"
         >
-          Robin Mind
+          {user?.fullName}
         </Text>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
@@ -56,14 +63,17 @@ const SellerHeaderMenu = () => {
           <div className="flex items-center gap-2">
             <Avatar>
               <AvatarImage src="/images/avatars/01.jpg" alt="Robin" />
-              <AvatarFallback className="rounded-lg">JR</AvatarFallback>
+              <AvatarFallback className="rounded-lg">
+                {user?.firstName?.[0]}
+                {user?.lastName?.[0] || 'US'}
+              </AvatarFallback>
             </Avatar>
             <div className="flex-1">
               <Text variant="body2" as="h5" className="truncate">
-                Robin
+                {user?.fullName}
               </Text>
               <Text variant="xs" className="text-muted-foreground truncate">
-                jsdev.robin@gmail.com
+                {user?.email}
               </Text>
             </div>
           </div>
