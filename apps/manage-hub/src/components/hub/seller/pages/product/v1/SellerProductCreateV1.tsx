@@ -49,7 +49,7 @@ import { Radio } from '@repo/ui/components/radio';
 import { cn } from '@repo/ui/lib/utils';
 import ProductMedia from './particles/ProductMedia';
 
-const SellerProductCreate = () => {
+const SellerProductCreateV1 = () => {
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     mode: 'onChange',
@@ -1444,4 +1444,4 @@ const SellerProductCreate = () => {
   );
 };
 
-export default SellerProductCreate;
+export default SellerProductCreateV1;

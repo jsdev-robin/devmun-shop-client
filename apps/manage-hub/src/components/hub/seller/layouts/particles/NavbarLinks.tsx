@@ -18,7 +18,7 @@ export const NavbarLinks = [
     icon: Package,
     submenu: [
       { label: 'Overview', href: '/seller/product/list' },
-      { label: 'Add Product', href: '/seller/product/create' },
+      { label: 'Add Product', href: '/seller/product/v1/create' },
     ],
   },
   {
