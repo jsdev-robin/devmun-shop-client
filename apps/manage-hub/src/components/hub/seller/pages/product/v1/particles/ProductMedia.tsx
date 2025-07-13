@@ -94,7 +94,6 @@ const ProductMedia = () => {
           }
         } catch {
           toast.error('Some files failed to upload');
-          utils.reset();
         } finally {
           previews.forEach((preview) => URL.revokeObjectURL(preview.localUrl));
           utils.reset();
