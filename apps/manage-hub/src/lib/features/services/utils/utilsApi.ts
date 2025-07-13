@@ -11,7 +11,15 @@ export const sellerProductEndpoints = apiSlice.injectEndpoints({
         body: publicId,
       }),
     }),
+
+    deleteTempImgById: builder.mutation<SuccessResponse, string>({
+      query: (publicId) => ({
+        url: `/utils/temp-img/${publicId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useSetTempImgMutation } = sellerProductEndpoints;
+export const { useSetTempImgMutation, useDeleteTempImgByIdMutation } =
+  sellerProductEndpoints;

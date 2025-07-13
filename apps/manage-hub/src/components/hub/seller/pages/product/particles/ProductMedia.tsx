@@ -8,13 +8,16 @@ import {
   CardHeader,
 } from '@repo/ui/components/card';
 import { useMuntahaDrop } from 'react-muntaha-uploader';
-import { Camera, Trash, Loader2, AlertCircle } from 'lucide-react';
+import { Camera, Trash, Loader2, AlertCircle, Loader } from 'lucide-react';
 import Text from '@repo/ui/components/text';
 import { cn } from '@repo/ui/lib/utils';
 import Image from 'next/image';
 import { Button } from '@repo/ui/components/button';
 import { toast } from 'sonner';
-import { useSetTempImgMutation } from '../../../../../../lib/features/services/utils/utilsApi';
+import {
+  useDeleteTempImgByIdMutation,
+  useSetTempImgMutation,
+} from '../../../../../../lib/features/services/utils/utilsApi';
 
 interface CloudinaryResponse {
   asset_id?: string;
@@ -31,7 +34,33 @@ const ProductMedia = () => {
   const [uploadedImages, setUploadedImages] = useState<CloudinaryResponse[]>(
     [],
   );
+  const [deletingIds, setDeletingIds] = useState<string[]>([]);
   const [setTempImg] = useSetTempImgMutation();
+  const [deleteTempImgById, { isLoading }] = useDeleteTempImgByIdMutation();
+
+  console.log(uploadedImages);
+
+  const handleDeleteImage = (publicId: string) => {
+    if (!publicId) return;
+    setDeletingIds((prev) => [...prev, publicId]);
+
+    deleteTempImgById(publicId)
+      .unwrap()
+      .catch(() => {
+        toast.error('Failed to delete image.');
+        setDeletingIds((prev) => prev.filter((id) => id !== publicId));
+      });
+  };
+
+  useEffect(() => {
+    if (!isLoading && deletingIds.length > 0) {
+      setUploadedImages((prev) =>
+        prev.filter((img) => !deletingIds.includes(img.public_id ?? '')),
+      );
+      toast.success('Image deleted successfully.');
+      setDeletingIds([]);
+    }
+  }, [isLoading, deletingIds]);
 
   const publicIds = useMemo(() => {
     return uploadedImages
@@ -179,8 +208,14 @@ const ProductMedia = () => {
                     variant="destructive"
                     size="icon"
                     className="absolute top-2 right-2"
+                    onClick={() => handleDeleteImage(img.public_id ?? '')}
+                    disabled={deletingIds.includes(img.public_id ?? '')}
                   >
-                    <Trash />
+                    {deletingIds.includes(img.public_id ?? '') ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      <Trash />
+                    )}
                   </Button>
                   {img.loading && (
                     <Loader2 className="animate-spin absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 size-10" />
