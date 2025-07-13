@@ -60,6 +60,9 @@ const ProductMedia = () => {
         if (!files) return;
 
         if (uploadedImages.length + files.length > 10) {
+          toast.error(
+            `Maximum 10 files allowed (you have ${uploadedImages.length})`,
+          );
           utils.reset();
           return;
         }
@@ -104,6 +107,7 @@ const ProductMedia = () => {
   const handleDeleteImage = async (publicId: string) => {
     if (!publicId) return;
     setDeletingIds((prev) => [...prev, publicId]);
+    utils.reset();
     await toast.promise(
       deleteTempImgById(publicId)
         .unwrap()
